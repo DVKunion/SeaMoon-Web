@@ -14,22 +14,20 @@
     ],
   },
   {
-    path: '/welcome',
-    name: 'welcome',
-    icon: 'smile',
-    component: './Welcome',
+    path: '/dashboard',
+    name: '仪表盘',
+    icon: 'dashboard',
+    component: './Dashboard',
   },
   {
-    path: '/admin',
-    name: 'admin',
-    icon: 'crown',
-    access: 'canAdmin',
+    path: '/network',
+    name: '网络',
+    icon: 'cluster',
     routes: [
       {
-        path: '/admin/sub-page',
-        name: 'sub-page',
-        icon: 'smile',
-        component: './Welcome',
+        path: 'proxy',
+        name: '节点',
+        component: './network/Proxy',
       },
       {
         component: './404',
@@ -37,14 +35,38 @@
     ],
   },
   {
-    name: 'list.table-list',
-    icon: 'table',
-    path: '/list',
-    component: './TableList',
+    path: '/application',
+    name: '应用',
+    icon: 'AppstoreAdd',
+    routes: [
+      {
+        component: './404',
+      },
+    ],
+  },
+  {
+    path: '/setting',
+    name: '配置',
+    icon: 'setting',
+    routes: [
+      {
+        path: 'system',
+        name: '系统', // 本地代理状态、web相关选项、管理员账户
+        component: './setting/System',
+      },
+      {
+        path: 'server',
+        name: '服务', // 当前服务运行状态
+        component: './setting/Server',
+      },
+      {
+        component: './404',
+      },
+    ]
   },
   {
     path: '/',
-    redirect: '/welcome',
+    redirect: '/dashboard',
   },
   {
     component: './404',
