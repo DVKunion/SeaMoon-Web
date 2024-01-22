@@ -1,57 +1,24 @@
-import React,  { useState } from "react";
-import {Button } from "antd";
-import {PageContainer, ProFormRadio, ProFormSwitch} from "@ant-design/pro-components";
+import React from "react";
+import {Tag} from "antd";
+import {PageContainer} from "@ant-design/pro-components";
+import {ProList} from '@ant-design/pro-components';
 
-// const data = [
-//   '语雀的天空',
-//   'Ant Design',
-//   '蚂蚁金服体验科技',
-//   'TechUI',
-//   'TechUI 2.0',
-//   'Bigfish',
-//   'Umi',
-//   'Ant Design Pro',
-// ].map((item) => ({
-//   title: item,
-//   subTitle: <Tag color="#5BD8A6">语雀专栏</Tag>,
-//   actions: [<a key="run">邀请</a>, <a key="delete">删除</a>],
-//   avatar:
-//     'https://gw.alipayobjects.com/zos/antfincdn/UCSiy1j6jx/xingzhuang.svg',
-//   content: (
-//     <div
-//       style={{
-//         flex: 1,
-//       }}
-//     >
-//       <div
-//         style={{
-//           width: 200,
-//         }}
-//       >
-//         <div>发布中</div>
-//         <Progress percent={80} />
-//       </div>
-//     </div>
-//   ),
-// }));
+const data = [
+  {
+    title: "HTTP",
+    subTitle: <Tag color="#5BD8A6">语雀专栏</Tag>,
+    actions: [<a key="detail">详情</a>, <a key="stop">停止</a>, <a key={"del"}>删除</a>],
+    avatar:
+      'https://gw.alipayobjects.com/zos/antfincdn/UCSiy1j6jx/xingzhuang.svg',
+    content: "",
+  },
+];
 
 const Proxy: React.FC = () => {
-
-  const [cardActionProps, setCardActionProps] = useState<'actions' | 'extra'>(
-    'extra',
-  );
-
-  const [ghost, setGhost] = useState<boolean>(false);
-
   return <PageContainer
+    title={"代理"}
     content=""
-    extra={
-      [
-        <Button key="add" type="primary">
-          添加
-        </Button>,
-      ]
-    }>
+    extra={""}>
     <div
       style={{
         backgroundColor: '#eee',
@@ -59,65 +26,41 @@ const Proxy: React.FC = () => {
         padding: 24,
       }}
     >
-      <ProFormRadio.Group
-        label="actions 放置的地方"
-        options={[
-          {
-            label: '设置为 action',
-            value: 'actions',
-          },
-          {
-            label: '设置为 extra',
-            value: 'extra',
-          },
-        ]}
-        fieldProps={{
-          value: cardActionProps,
-          onChange: (e) => setCardActionProps(e.target.value),
+      <ProList<any>
+        ghost={true}
+        itemCardProps={{
+          ghost: true,
         }}
-      />
-      <ProFormSwitch
-        label="幽灵模式"
-        fieldProps={{
-          checked: ghost,
-          onChange: (e) => setGhost(e),
+        pagination={{
+          defaultPageSize: 8,
+          showSizeChanger: false,
         }}
+        showActions="hover"
+        rowSelection={{}}
+        grid={{gutter: 16, column: 3}}
+        onItem={(record: any) => {
+          return {
+            onMouseEnter: () => {
+              console.log(record);
+            },
+            onClick: () => {
+              console.log(record);
+            },
+          };
+        }}
+        metas={{
+          title: {},
+          subTitle: {},
+          type: {},
+          avatar: {},
+          content: {},
+          actions: {
+            cardActionProps: 'extra',
+          },
+        }}
+        headerTitle="卡片列表展示"
+        dataSource={data}
       />
-      {/*<ProList<any>*/}
-      {/*  ghost={ghost}*/}
-      {/*  itemCardProps={{*/}
-      {/*    ghost,*/}
-      {/*  }}*/}
-      {/*  pagination={{*/}
-      {/*    defaultPageSize: 8,*/}
-      {/*    showSizeChanger: false,*/}
-      {/*  }}*/}
-      {/*  showActions="hover"*/}
-      {/*  rowSelection={{}}*/}
-      {/*  grid={{ gutter: 16, column: 2 }}*/}
-      {/*  onItem={(record: any) => {*/}
-      {/*    return {*/}
-      {/*      onMouseEnter: () => {*/}
-      {/*        console.log(record);*/}
-      {/*      },*/}
-      {/*      onClick: () => {*/}
-      {/*        console.log(record);*/}
-      {/*      },*/}
-      {/*    };*/}
-      {/*  }}*/}
-      {/*  metas={{*/}
-      {/*    title: {},*/}
-      {/*    subTitle: {},*/}
-      {/*    type: {},*/}
-      {/*    avatar: {},*/}
-      {/*    content: {},*/}
-      {/*    actions: {*/}
-      {/*      cardActionProps,*/}
-      {/*    },*/}
-      {/*  }}*/}
-      {/*  headerTitle="卡片列表展示"*/}
-      {/*  dataSource={data}*/}
-      {/*/>*/}
     </div>
   </PageContainer>
 }

@@ -1,4 +1,3 @@
-import {GithubOutlined} from '@ant-design/icons';
 import {DefaultFooter} from '@ant-design/pro-components';
 
 const Footer: React.FC = () => {
@@ -7,15 +6,7 @@ const Footer: React.FC = () => {
 
   return (
     <DefaultFooter
-      copyright={`${currentYear} ${"DVKunion"}`}
-      links={[
-        {
-          key: 'github',
-          title: <GithubOutlined/>,
-          href: 'https://github.com/DVKunion/Seamoon',
-          blankTarget: true,
-        },
-      ]}
+      copyright={`${currentYear} ${"DVK"}`}
     />
   );
 };

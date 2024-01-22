@@ -1,4 +1,4 @@
-import { BookOutlined } from '@ant-design/icons';
+import {BookOutlined, GithubOutlined} from '@ant-design/icons';
 import { Space } from 'antd';
 import React from 'react';
 import { useModel } from 'umi';
@@ -29,6 +29,13 @@ const GlobalHeaderRight: React.FC = () => {
         }}
       >
         <BookOutlined />
+      </span>
+      <span
+        className={styles.action}
+        onClick={() => {
+          window.open('https://www.github.com/DVKunion/Seamoon');
+        }}>
+        <GithubOutlined />
       </span>
       <Avatar />
     </Space>
