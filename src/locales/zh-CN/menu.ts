@@ -1,4 +1,9 @@
 export default {
+  'menu.dashboard': '数据中心',
+  'menu.setting': '系统配置',
+  'menu.service': '服务',
+  'menu.cloud': '云账户管理',
+  'menu.serverless': '函数实例',
   'menu.welcome': '欢迎',
   'menu.more-blocks': '更多区块',
   'menu.home': '首页',
@@ -7,7 +12,6 @@ export default {
   'menu.login': '登录',
   'menu.register': '注册',
   'menu.register-result': '注册结果',
-  'menu.dashboard': 'Dashboard',
   'menu.dashboard.analysis': '分析页',
   'menu.dashboard.monitor': '监控页',
   'menu.dashboard.workplace': '工作台',

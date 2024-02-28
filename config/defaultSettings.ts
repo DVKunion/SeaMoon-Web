@@ -14,7 +14,7 @@ const Settings: LayoutSettings & {
   colorWeak: false,
   title: 'SeaMoon',
   pwa: false,
-  logo: 'icon.svg',
+  logo: '/icon.svg',
   iconfontUrl: '',
 };
 

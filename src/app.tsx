@@ -6,7 +6,6 @@ import type {RunTimeLayoutConfig} from 'umi';
 import {history} from 'umi';
 import {ConfigProvider} from 'antd';
 import defaultSettings from '../config/defaultSettings';
-import {currentUser as queryCurrentUser} from './services/ant-design-pro/api';
 
 const loginPath = '/user/login';
 
@@ -26,18 +25,19 @@ export const initialStateConfig = {
  * */
 export async function getInitialState(): Promise<{
   settings?: Partial<LayoutSettings>;
-  currentUser?: API.CurrentUser;
+  currentUser?: string | null;
   loading?: boolean;
-  fetchUserInfo?: () => Promise<API.CurrentUser | undefined>;
+  fetchUserInfo?: () => Promise<string | null>;
 }> {
   const fetchUserInfo = async () => {
-    try {
-      const msg = await queryCurrentUser();
-      return msg.data;
-    } catch (error) {
+    const token = localStorage.getItem("token");
+    if (token !== "") {
+      return token;
+    }
+    else {
       history.push(loginPath);
     }
-    return undefined;
+    return "";
   };
   // 如果不是登录页面，执行
   if (history.location.pathname !== loginPath) {
@@ -80,7 +80,7 @@ export const layout: RunTimeLayoutConfig = ({initialState, setInitialState}) => 
       return (
         <>
           {children}
-          {!props.location?.pathname?.includes('/login') && (
+          {!props.location?.pathname?.includes('/user/login') && (
             <SettingDrawer
               disableUrlParams
               enableDarkTheme
