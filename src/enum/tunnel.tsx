@@ -1,12 +1,12 @@
 import {Space} from "antd";
 import IconFont from "@/components/IconFont";
-import {Tag} from "_antd@4.24.15@antd";
+import {Tag} from "antd";
 import {
   ClockCircleOutlined,
   CloseCircleOutlined, ExclamationCircleOutlined,
   MinusCircleOutlined,
   SyncOutlined
-} from "_@ant-design_icons@4.8.1@@ant-design/icons";
+} from "@ant-design/icons";
 
 export const TunnelTypeValueEnum = {
   "websocket-tunnel": <Space><IconFont type={"icon-web-socket"}/>WebSockets</Space>,

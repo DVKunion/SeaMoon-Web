@@ -1,8 +1,7 @@
 import React from "react";
-import {ProForm, ProFormText, ProFormSelect} from "@ant-design/pro-components";
+import {ProForm, ProFormText, ProFormSelect, ProFormSwitch} from "@ant-design/pro-components";
 import {toNumber} from "lodash";
 import {ProxyTypeValueEnum} from "@/enum/service";
-import {ProFormSwitch} from "_@ant-design_pro-components@1.1.5@@ant-design/pro-components";
 
 export const ProxyForm: React.FC = (props) => {
   return <> <ProForm.Group

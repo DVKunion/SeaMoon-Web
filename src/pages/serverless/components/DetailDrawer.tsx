@@ -232,7 +232,7 @@ const DetailDrawer: React.FC<DetailProps> = (props) => {
     />
     <Divider/>
     <ProDescriptions
-      title={"关联信息"}
+      title={"关联信息 (todo) "}
       column={1}
       actionRef={actionRef}
       editable={{

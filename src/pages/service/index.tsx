@@ -8,11 +8,20 @@ import {PlusOutlined} from "@ant-design/icons";
 import CreateForm from "@/pages/service/components/CreateForm";
 import DetailDrawer from "@/pages/service/components/DetailDrawer";
 import {handleCreateProxy, handleDeleteProxy, handleUpdateProxy} from "@/pages/service/handle";
+import {SpeedTransfer} from "@/components/SpeedTransfer";
 
 const {Statistic} = StatisticCard;
 
 const calcThread = (n: number, o: number) => {
   return n > o ? "up" : n === o ? undefined : "down"
+}
+
+type staticProps = {
+  conn: number,
+  speed: number,
+  lag: number,
+  in_bound: number,
+  out_bound: number
 }
 
 const Proxy: React.FC = () => {
@@ -22,8 +31,8 @@ const Proxy: React.FC = () => {
   const [showDetail, setShowDetail] = useState<boolean>(false);
   const [createModalVisible, handleModalVisible] = useState<boolean>(false);
   const [currentRow, setCurrentRow] = useState<Service.Proxy>();
-  const [nData, setNData] = useState<Map<number, { conn: number, speed: number, lag: number }>>(new Map());
-  const [oData, setOData] = useState<Map<number, { conn: number, speed: number, lag: number }>>(new Map());
+  const [nData, setNData] = useState<Map<number, staticProps>>(new Map());
+  const [oData, setOData] = useState<Map<number, staticProps>>(new Map());
 
   // 自动轮询器
   useEffect(() => {
@@ -49,18 +58,20 @@ const Proxy: React.FC = () => {
     <ProList<Service.Proxy>
       actionRef={actionRef}
       pagination={{
-        defaultPageSize: 10,
+        defaultPageSize: 12,
         showSizeChanger: true,
       }}
       request={async (params, sort, filter) => {
         const data = await getServiceProxy(params.current === undefined ? 0 : params.current - 1, params.pageSize === undefined ? 10 : params.pageSize)
         if (data.success) {
-          const bData = new Map<number, { conn: number, speed: number, lag: number }>();
+          const bData = new Map<number, staticProps>();
           data.data.forEach((item) => {
             bData.set(item.id, {
               conn: item.conn,
               speed: item.speed,
               lag: item.lag,
+              in_bound: item.in_bound,
+              out_bound: item.out_bound,
             });
           })
           // 是否是第一次:
@@ -109,7 +120,7 @@ const Proxy: React.FC = () => {
         },
         subTitle: {
           render: (_, record) => {
-            return <ProxyDynamicTagList status={record.status} spin={autoRoll} />
+            return <ProxyDynamicTagList status={record.status} spin={autoRoll}/>
           }
         },
         avatar: {
@@ -124,10 +135,26 @@ const Proxy: React.FC = () => {
             return <div>
               <Statistic title="当前连接:" value={record.conn}
                          trend={calcThread(record.conn, oRecord === undefined ? 0 : oRecord.conn)}/>
-              <Statistic title="当前速率:" value={record.speed + " Mbps"}
-                         trend={calcThread(record.speed, oRecord === undefined ? 0 : oRecord.speed)}/>
-              <Statistic title="当前延迟:" value={record.lag + " ms"}
-                         trend={calcThread(record.lag, oRecord === undefined ? 0 : oRecord.lag)}/>
+              <Space size={80}>
+                <Statistic title="当前速率:" value={record.speed + " Mbps"}
+                           trend={calcThread(record.speed, oRecord === undefined ? 0 : oRecord.speed)}/>
+                <Statistic title="当前延迟:" value={record.lag + " ms"}
+                           trend={calcThread(record.lag, oRecord === undefined ? 0 : oRecord.lag)}/>
+              </Space>
+              <Space size={80}>
+                <Statistic title="总计流入:" valueRender={() => {
+                  return SpeedTransfer({
+                    bytes: record.in_bound,
+                    decimals:2,
+                  });
+                }} trend={calcThread(record.in_bound, oRecord === undefined ? 0 : oRecord.in_bound)}/>
+                <Statistic title="总计流出:" valueRender={() => {
+                  return SpeedTransfer({
+                    bytes: record.out_bound,
+                    decimals:2,
+                  });
+                }} trend={calcThread(record.out_bound, oRecord === undefined ? 0 : oRecord.out_bound)}/>
+              </Space>
             </div>
           }
         },
@@ -168,7 +195,7 @@ const Proxy: React.FC = () => {
       }}
       onDelete={async (value) => {
         // 检查当前状态是否为停止，如果非停止，则禁止删除。
-        if(value.status !== 3) {
+        if (value.status !== 3) {
           message.error("当前服务状态仍在运行中，请确保服务停止后再删除");
           return;
         }

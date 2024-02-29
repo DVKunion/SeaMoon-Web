@@ -28,7 +28,7 @@ export const TunnelSelect: React.FC<TunnelProps> = (props: TunnelProps) => {
         if(!props.tor || (props.tor && item.tunnel_config.tor)) {
           res.push({
             key: item.id,
-            label: <Space>{TunnelTypeValueEnum[item.type]}{item.name}</Space>,
+            label: <Space>{TunnelTypeValueEnum[item.type]} - {item.name}</Space>,
             value: item.id,
             obj: item
           });

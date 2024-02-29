@@ -17,12 +17,12 @@ export const TunnelForm: React.FC = (props) => {
           message: "请填写函数名称!",
         },
         {
-          pattern: /^[a-zA-Z0-9]+$/,
-          message: "代理服务只能为英文/数字!",
+          pattern: /^[a-zA-Z0-9_]+$/,
+          message: "代理服务只能为英文/数字/下划线!",
         },
         {
-          max: 12,
-          message: "代理名称不要超过12个字符",
+          max: 24,
+          message: "代理名称不要超过24个字符",
         }
       ]
       }

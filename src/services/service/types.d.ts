@@ -9,6 +9,8 @@ declare namespace Service {
     conn: number,
     speed: number,
     lag: number,
+    in_bound: number,
+    out_bound: number,
     created_at: string,
     updated_at: string,
   }

@@ -5,6 +5,7 @@ import {FormValueType} from "@/pages/service/components/CreateForm";
 import {Button, Divider, Drawer, Popconfirm, Space} from "antd";
 import {PoweroffOutlined, SyncOutlined} from "@ant-design/icons";
 import {ProxyDynamicTagList, ProxyTypeValueEnum} from "@/enum/service";
+import {SpeedTransfer} from "@/components/SpeedTransfer";
 
 
 export type DetailProps = {
@@ -57,7 +58,7 @@ const DetailDrawer: React.FC<DetailProps> = (props) => {
         >
           <Button type={"primary"} danger>删除</Button>
         </Popconfirm>
-       </Space>
+      </Space>
     }
   >
     <ProDescriptions
@@ -78,7 +79,7 @@ const DetailDrawer: React.FC<DetailProps> = (props) => {
           dataIndex: 'status',
           span: 2,
           render: (dom, entry) => {
-            return <ProxyDynamicTagList status={entry.status ? entry.status : 0} spin={props.spin} />
+            return <ProxyDynamicTagList status={entry.status ? entry.status : 0} spin={props.spin}/>
           }
         },
         {
@@ -131,7 +132,7 @@ const DetailDrawer: React.FC<DetailProps> = (props) => {
     />
     <Divider/>
     <ProDescriptions
-      title={"关联信息"}
+      title={"关联信息 (todo)"}
       column={1}
       actionRef={actionRef}
       editable={{
@@ -163,12 +164,13 @@ const DetailDrawer: React.FC<DetailProps> = (props) => {
     <Divider/>
     <ProDescriptions
       title={"网络数据"}
-      column={3}
+      column={2}
       actionRef={actionRef}
       columns={[
         {
           title: '请求连接数',
           key: 'number',
+          span: 2,
           editable: false,
           dataIndex: 'conn',
         },
@@ -190,20 +192,42 @@ const DetailDrawer: React.FC<DetailProps> = (props) => {
             return entity.lag + " ms"
           }
         },
+        {
+          title: '总流入',
+          key: 'in_bound',
+          editable: false,
+          dataIndex: 'in_bound',
+          render: (dom, entity) => {
+            return SpeedTransfer({
+              bytes: entity.in_bound || 0
+            })
+          }
+        },
+        {
+          title: '总流出',
+          key: 'out_bound',
+          editable: false,
+          dataIndex: 'out_bound',
+          render: (dom, entity) => {
+            return SpeedTransfer({
+              bytes: entity.out_bound || 0
+            })
+          }
+        },
       ]}
       dataSource={props.values}
     >
       <ProDescriptions.Item
         label="24小时流量数据"
-        span={3}
+        span={2}
       >
-
+        todo
       </ProDescriptions.Item>
       <ProDescriptions.Item
         label="其他图形"
-        span={3}
+        span={2}
       >
-
+        todo
       </ProDescriptions.Item>
     </ProDescriptions>
     <Divider/>

@@ -13,12 +13,12 @@
       },
     ],
   },
-  {
-    path: '/dashboard',
-    name: 'dashboard',
-    icon: 'dashboard',
-    component: './dashboard/',
-  },
+  // {
+  //   path: '/dashboard',
+  //   name: 'dashboard',
+  //   icon: 'dashboard',
+  //   component: './dashboard/',
+  // },
   {
     path: '/service',
     name: 'service',
@@ -45,7 +45,8 @@
   },
   {
     path: '/',
-    redirect: '/dashboard',
+    redirect: '/service',
+    // redirect: '/dashboard',
   },
   {
     component: './404',

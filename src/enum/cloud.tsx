@@ -4,17 +4,17 @@ import IconFont from "@/components/IconFont";
 export const CloudProvideTypeIcon = [
   <></>,
   <IconFont type={"icon-aliyun"}/>,
-  <IconFont type={"icon-tengxunyun1"}/>,
-  <IconFont type={"icon-huaweiyun1"}/>,
-  <IconFont type={"icon-baiduyun"}/>,
+  // <IconFont type={"icon-tengxunyun1"}/>,
+  // <IconFont type={"icon-huaweiyun1"}/>,
+  // <IconFont type={"icon-baiduyun"}/>,
   <IconFont type={"icon-sealos"}/>
 ]
 
 export const CloudProvideTypeValueEnum = {
   1: <Space><IconFont type={"icon-aliyun"}/>阿里云</Space>,
-  2: <Space><IconFont type={"icon-tengxunyun1"}/>腾讯云</Space>,
-  3: <Space><IconFont type={"icon-huaweiyun1"}/>华为云</Space>,
-  4: <Space><IconFont type={"icon-baiduyun"}/>百度云</Space>,
+  // 2: <Space><IconFont type={"icon-tengxunyun1"}/>腾讯云</Space>,
+  // 3: <Space><IconFont type={"icon-huaweiyun1"}/>华为云</Space>,
+  // 4: <Space><IconFont type={"icon-baiduyun"}/>百度云</Space>,
   5: <Space><IconFont type={"icon-sealos"}/>Sealos</Space>,
 }
 
@@ -23,15 +23,15 @@ export const CloudProvideTypeEnum = {
   1: {
     text: <Space><IconFont type={"icon-aliyun"}/>阿里云</Space>,
   },
-  2: {
-    text: <Space><IconFont type={"icon-tengxunyun1"}/>腾讯云</Space>,
-  },
-  3: {
-    text: <Space><IconFont type={"icon-huaweiyun1"}/>华为云</Space>,
-  },
-  4: {
-    text: <Space><IconFont type={"icon-baiduyun"}/>百度云</Space>,
-  },
+  // 2: {
+  //   text: <Space><IconFont type={"icon-tengxunyun1"}/>腾讯云</Space>,
+  // },
+  // 3: {
+  //   text: <Space><IconFont type={"icon-huaweiyun1"}/>华为云</Space>,
+  // },
+  // 4: {
+  //   text: <Space><IconFont type={"icon-baiduyun"}/>百度云</Space>,
+  // },
   5: {
     text: <Space><IconFont type={"icon-sealos"}/>Sealos</Space>,
   },
@@ -65,7 +65,6 @@ export const CloudProviderStatusEnum = {
 }
 
 export const SealosRegionEnum = {
-
   // for sealos
   "internal": "国内区",
   "external": "国外区"

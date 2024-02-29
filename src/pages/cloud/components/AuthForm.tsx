@@ -1,6 +1,6 @@
 import React from 'react';
 import {ProFormText, ProFormTextArea, ProFormSelect, ProForm} from "@ant-design/pro-components";
-import {RegionEnum} from "@/enum/cloud";
+import {ALiYunRegionEnum, SealosRegionEnum} from "@/enum/cloud";
 
 export type CloudProviderType = {
   type: string
@@ -17,7 +17,7 @@ export const CloudProviderAuthForm: React.FC<CloudProviderType> = (props) => {
           showSearch={true}
           placeholder={""}
           tooltip={"选择云账户所属的地区"}
-          valueEnum={RegionEnum}
+          valueEnum={ALiYunRegionEnum}
           rules={[
             {
               required: true,
@@ -65,58 +65,6 @@ export const CloudProviderAuthForm: React.FC<CloudProviderType> = (props) => {
     case "2":
     case "3":
     case "4":
-      return <ProForm.Group>
-        <ProFormSelect
-          name="region"
-          width="xl"
-          label="账户地区"
-          placeholder={""}
-          tooltip={"选择云账户所属的地区"}
-          valueEnum={RegionEnum}
-          rules={[
-            {
-              required: true,
-              message: "请选择云账户所属的地区!",
-            },
-          ]}
-        />
-        <ProFormText
-          name={"access_id"}
-          label={"AccessId"}
-          width="xl"
-          placeholder={""}
-          rules={[
-            {
-              required: true,
-              message: "请填写主账户ID信息!",
-            },
-          ]}
-        />
-        <ProFormText
-          name={"access_key"}
-          label={"AccessKey"}
-          width="xl"
-          placeholder={""}
-          rules={[
-            {
-              required: true,
-              message: "请填写认证信息!",
-            },
-          ]}
-        />
-        <ProFormText
-          name={"access_secret"}
-          label={"SecretKey"}
-          width="xl"
-          placeholder={""}
-          rules={[
-            {
-              required: true,
-              message: "请填写认证信息!",
-            },
-          ]}
-        />
-      </ProForm.Group>;
     case "5": // Sealos Kubeconfig
       return <ProForm.Group>
         <ProFormSelect
@@ -125,7 +73,7 @@ export const CloudProviderAuthForm: React.FC<CloudProviderType> = (props) => {
           label="账户地区"
           placeholder={""}
           tooltip={"选择云账户所属的地区"}
-          valueEnum={RegionEnum}
+          valueEnum={SealosRegionEnum}
           rules={[
             {
               required: true,
