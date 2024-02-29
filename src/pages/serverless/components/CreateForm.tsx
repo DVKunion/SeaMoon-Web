@@ -11,6 +11,8 @@ export type FormValueType = {
   tunnel_auth_type: number,
   tls: boolean,
   tor: boolean,
+  tunnel_name: string,
+  tunnel_type: string,
 } & Partial<Serverless.Tunnel>;
 
 export type CreateFormProps = {
@@ -73,7 +75,7 @@ const CreateForm: React.FC<CreateFormProps> = (props) => {
           tunnel_auth_type: 0,
           instance: 5,
           port: 9000,
-          type: "websocket-tunnel",
+          tunnel_type: "websocket-tunnel",
           tls: true,
           tor: false,
         }}

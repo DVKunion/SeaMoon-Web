@@ -1,13 +1,14 @@
-import React, {useState} from "react";
-import {PageContainer, ProCard, ProForm, ProFormText, ProFormSwitch} from "@ant-design/pro-components";
+import React, {useState, useRef} from "react";
+import {PageContainer, ProCard, ProForm, ProFormText, ProFormInstance} from "@ant-design/pro-components";
 import {Button, message, Space, Tag} from "antd"
-import {getSysConfig, updateSysConfig} from "@/services/setting/api";
+import {getSysConfig} from "@/services/setting/api";
 import {GithubOutlined} from "@ant-design/icons";
 import {updatePasswd} from "@/services/user/api";
+import {handleUpdateSysConfig} from "@/pages/setting/hanlder";
 
 const Setting: React.FC = () => {
 
-  const [config, setConfig] = useState([])
+  const formRef = useRef<ProFormInstance>();
   const [version, setVersion] = useState("")
 
   return <PageContainer
@@ -15,10 +16,10 @@ const Setting: React.FC = () => {
   >
     <ProCard>
       <ProForm
+        formRef={formRef}
         submitter={false}
         onFinish={async (values) => {
           if (values["admin_password"] !== "" && values["admin_password"] != undefined) {
-            console.log(values["admin_password"])
             const res = await updatePasswd(values["admin_password"]);
             if (res.success) {
               message.success('修改密码成功', 1);
@@ -26,32 +27,14 @@ const Setting: React.FC = () => {
               message.error(res.code + ":" + res.msg, 1)
             }
           }
-          config.forEach((item: Config.SystemConfig) => {
-            if (item.Value !== values[item.Key]) {
-              updateSysConfig({
-                ID: item.ID,
-                Key: item.Key,
-                Value: values[item.Key].toString(),
-              })
-            }
-          });
+          await handleUpdateSysConfig(values);
+          formRef?.current?.setFieldsValue(values);
         }}
         params={{}}
         request={async () => {
-          const res = {};
           const {data} = await getSysConfig();
-          // @ts-ignore
-          setConfig(data)
-          data.forEach((item: Config.SystemConfig) => {
-            // 特殊处理
-            if (item.Key.indexOf("enable") != -1) {
-              res[item.Key] = item.Value === "true"
-            } else {
-              res[item.Key] = item.Value
-            }
-          })
-          setVersion(res["version"])
-          return res;
+          setVersion(data.version);
+          return data;
         }}
       >
         <ProForm.Group title={"HTTP 管理服务"}>
@@ -85,21 +68,21 @@ const Setting: React.FC = () => {
             placeholder={""}
           />
         </ProForm.Group>
-        <ProForm.Group title={"其他配置"}>
-          <ProFormSwitch
-            name="tor_enable"
-            label="是否开启 Tor 网桥"
-            tooltip={"开启 Tor 网桥后, 会尝试请求开启了 Tor 标识的服务节点，您的代理服务将可以访问暗网域名"}
-            width={"xs"}
-            fieldProps={
-              {
-                checkedChildren: "开启",
-                unCheckedChildren: "关闭",
-              }
-            }
-            style={{display: 'flex', alignItems: 'center'}}
-          />
-        </ProForm.Group>
+        {/*<ProForm.Group title={"其他配置"}>*/}
+        {/*<ProFormSwitch*/}
+        {/*  name="tor_enable"*/}
+        {/*  label="是否开启 Tor 网桥"*/}
+        {/*  tooltip={"开启 Tor 网桥后, 会尝试请求开启了 Tor 标识的服务节点，您的代理服务将可以访问暗网域名"}*/}
+        {/*  width={"xs"}*/}
+        {/*  fieldProps={*/}
+        {/*    {*/}
+        {/*      checkedChildren: "开启",*/}
+        {/*      unCheckedChildren: "关闭",*/}
+        {/*    }*/}
+        {/*  }*/}
+        {/*  style={{display: 'flex', alignItems: 'center'}}*/}
+        {/*/>*/}
+        {/*</ProForm.Group>*/}
         <ProForm.Item>
           <Button type="primary" htmlType="submit" style={{float: "right", marginRight: "4em"}}>
             保存

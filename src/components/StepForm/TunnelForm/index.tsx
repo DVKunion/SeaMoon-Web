@@ -8,7 +8,7 @@ export const TunnelForm: React.FC = (props) => {
     title={"基础信息"}
   >
     <ProFormText
-      name="name"
+      name="tunnel_name"
       label={"函数名称"}
       colProps={{span: 20}}
       rules={[
@@ -134,7 +134,7 @@ export const TunnelForm: React.FC = (props) => {
         ]}
       />
       <ProFormSelect
-        name="type"
+        name="tunnel_type"
         label={"隧道协议类型"}
         colProps={{span: 8, offset: 4}}
         placeholder={""}

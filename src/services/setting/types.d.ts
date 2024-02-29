@@ -1,7 +1,8 @@
 declare namespace Config {
   type SystemConfig = {
-    ID: number,
-    Key: string,
-    Value: string,
+    control_addr: string,
+    control_port: string,
+    control_log: string,
+    version: string
   }
 }

@@ -2,7 +2,7 @@ import React, {useRef, useState, useEffect} from "react";
 import {Button, message, Space, Switch, Tag} from "antd";
 import {PageContainer, ActionType, ProList, StatisticCard} from "@ant-design/pro-components";
 import IconFont from "@/components/IconFont";
-import {ProxyTagList, ProxyTypeIcon, ProxyTypeTagColor} from "@/enum/service";
+import {ProxyDynamicTagList, ProxyTypeIcon, ProxyTypeTagColor} from "@/enum/service";
 import {getServiceProxy} from "@/services/service/api";
 import {PlusOutlined} from "@ant-design/icons";
 import CreateForm from "@/pages/service/components/CreateForm";
@@ -109,7 +109,7 @@ const Proxy: React.FC = () => {
         },
         subTitle: {
           render: (_, record) => {
-            return ProxyTagList[record.status];
+            return <ProxyDynamicTagList status={record.status} spin={autoRoll} />
           }
         },
         avatar: {
@@ -135,7 +135,7 @@ const Proxy: React.FC = () => {
           cardActionProps: 'extra',
           render: (_, record) => {
             return <Tag
-              color={ProxyTypeTagColor[record.type]}>{record.type + "://" + record.listen_addr + ":" + record.listen_port}</Tag>;
+              color={ProxyTypeTagColor[record.type]}>{record.type + "://" + record.listen_address + ":" + record.listen_port}</Tag>;
           }
         },
       }}
@@ -168,7 +168,7 @@ const Proxy: React.FC = () => {
       }}
       onDelete={async (value) => {
         // 检查当前状态是否为停止，如果非停止，则禁止删除。
-        if(value.status !== 2) {
+        if(value.status !== 3) {
           message.error("当前服务状态仍在运行中，请确保服务停止后再删除");
           return;
         }
@@ -185,6 +185,7 @@ const Proxy: React.FC = () => {
       }}
       detailVisible={showDetail}
       values={currentRow || {}}
+      spin={autoRoll}
     />
   </PageContainer>
 }

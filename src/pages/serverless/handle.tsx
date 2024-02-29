@@ -1,6 +1,6 @@
-import {FormValueType} from "./components/CreateForm";
 import {message} from "antd";
-import {createServerlessTunnel, deleteServerlessTunnel} from "@/services/serverless/api";
+import type {FormValueType} from "./components/CreateForm";
+import {createServerlessTunnel, deleteServerlessTunnel, updateServerlessTunnel} from "@/services/serverless/api";
 
 export const handleCreateTunnel = async (fields: FormValueType) => {
   const hide = message.loading('创建中......', 30);
@@ -9,6 +9,21 @@ export const handleCreateTunnel = async (fields: FormValueType) => {
     hide();
     if (success) {
       message.success('创建成功');
+      return true;
+    }
+  } catch (error) {
+    hide();
+  }
+  return false;
+};
+
+export const handleUpdateTunnel = async (fields: FormValueType) => {
+  const hide = message.loading('更新中......');
+  try {
+    const {success} = await updateServerlessTunnel(fields);
+    hide();
+    if (success) {
+      message.success('更新成功');
       return true;
     }
   } catch (error) {

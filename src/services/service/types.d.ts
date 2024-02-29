@@ -4,7 +4,7 @@ declare namespace Service {
     name: string,
     type: string,
     status: number,
-    listen_addr: string,
+    listen_address: string,
     listen_port: string
     conn: number,
     speed: number,

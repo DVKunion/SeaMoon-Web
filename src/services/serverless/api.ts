@@ -1,4 +1,4 @@
-import request from "@/services/request/request";
+import request from '@/services/request'
 import {FormValueType} from "@/pages/serverless/components/CreateForm";
 import {toNumber} from "lodash";
 
@@ -17,9 +17,9 @@ export async function getServerlessTunnel(page: number, size: number) {
 export async function createServerlessTunnel(data: FormValueType) {
   const params = {
     "cloud_provider_id": data.cloud_provider_id,
-    "name": data.name,
+    "name": data.tunnel_name,
     "port":data.port?.toString(),
-    "type": data.type,
+    "type": data.tunnel_type,
     "status": 1,
     "tunnel_config": {
       "cpu": toNumber(data.cpu),

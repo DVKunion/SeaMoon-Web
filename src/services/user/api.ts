@@ -1,4 +1,4 @@
-import request from '../request/request'
+import request from '@/services/request'
 
 export async function login(body: Auth.User, options?: { [key: string]: any }) {
   return request<Auth.Response>('/api/user/login', {
@@ -19,8 +19,8 @@ export async function updatePasswd(passwd: string) {
       'Authorization': localStorage.getItem("token") || "",
     },
     data: {
-      "Username": localStorage.getItem("user"),
-      "Password": passwd,
+      "username": localStorage.getItem("user"),
+      "password": passwd,
     },
   });
 }

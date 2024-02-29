@@ -1,13 +1,13 @@
 import React, {useRef, useState} from 'react';
 import type {ProDescriptionsActionType} from '@ant-design/pro-components';
 import {ProDescriptions} from '@ant-design/pro-components';
-import {FormValueType} from "@/pages/service/components/CreateForm";
 import {Button, Divider, Drawer, message, Popconfirm, Space} from "antd";
-import {CopyOutlined, PoweroffOutlined, SyncOutlined} from "@ant-design/icons";
-// @ts-ignore
-import {CopyToClipboard} from 'react-copy-to-clipboard';
 import {TunnelAuthFCType, TunnelStatusTag, TunnelTypeValueEnum} from "@/enum/tunnel";
 import {CloudProvideTypeValueEnum, RegionEnum} from "@/enum/cloud";
+import {CheckCircleTwoTone, CloseCircleTwoTone, CopyOutlined, PoweroffOutlined, SyncOutlined} from "@ant-design/icons";
+// @ts-ignore
+import {CopyToClipboard} from 'react-copy-to-clipboard';
+import {FormValueType} from "./CreateForm";
 
 export type DetailProps = {
   onCancel: () => void;
@@ -33,7 +33,7 @@ const DetailDrawer: React.FC<DetailProps> = (props) => {
           onCopy={() => message.success("已复制函数地址")}>
           <Button shape={"round"} ghost icon={<CopyOutlined/>}></Button>
         </CopyToClipboard>
-        {props.values.status === 2 ? <Button
+        {props.values.status === 3 ? <Button
           onMouseEnter={() => {
             setSpin(true);
           }}
@@ -43,29 +43,30 @@ const DetailDrawer: React.FC<DetailProps> = (props) => {
           type={"primary"}
           shape={"round"}
           icon={<SyncOutlined spin={spin}/>}
-          onClick={async () => {
-            props.values.status = 4;
-            await props.onSubmit(props.values);
+          onClick={() => {
+            props.values.status = 1;
+            props.onSubmit(props.values as FormValueType);
           }}
         >启用</Button> : <Button
           type={"primary"}
           shape={"round"}
           danger
           onClick={() => {
-            props.values.status = 2;
-            props.onSubmit(props.values).then();
+            props.values.status = 3;
+            props.onSubmit(props.values as FormValueType);
           }}
           icon={<PoweroffOutlined/>}>停用</Button>}
       </Space>
     }
     footer={
-      <Space style={{float: "right"}}><Button type={"primary"} onClick={() => {
-        props.onSubmit(props.values).then();
-      }}>更新</Button>
+      <Space style={{float: "right"}}>
+      {/*  <Button type={"primary"} onClick={() => {*/}
+      {/*  props.onSubmit(props.values).then();*/}
+      {/*}}>更新</Button>*/}
         <Popconfirm
           title="删除函数?"
           onConfirm={() => {
-            props.onDelete(props.values).then();
+            props.onDelete(props.values as FormValueType).then();
           }}
           okText="确认"
           cancelText="取消"
@@ -201,9 +202,29 @@ const DetailDrawer: React.FC<DetailProps> = (props) => {
           title: '函数认证方式',
           key: 'tunnel_config.auth_type',
           editable: false,
-          dataIndex: "tunnel_auth_type",
+          dataIndex: "tunnel_config.tunnel_auth_type",
           render: (dom, record) => {
             return TunnelAuthFCType[record.tunnel_config?.tunnel_auth_type || 0]
+          }
+        },
+        {
+          title: '是否开启 tls 认证',
+          key: 'tls',
+          editable: false,
+          dataIndex: "tunnel_config.tls",
+          render: (dom, record) => {
+            return record.tunnel_config?.tls ? <CheckCircleTwoTone style={{marginTop: "4px"}}  twoToneColor="#52c41a" /> :
+              <CloseCircleTwoTone style={{marginTop: "4px"}} twoToneColor="#eb2f96"/>
+          }
+        },
+        {
+          title: '是否开启 tor 网桥',
+          key: 'tls',
+          editable: false,
+          dataIndex: "tunnel_config.tor",
+          render: (dom, record) => {
+            return record.tunnel_config?.tor ? <CheckCircleTwoTone style={{marginTop: "4px"}}  twoToneColor="#52c41a" /> :
+              <CloseCircleTwoTone style={{marginTop: "4px"}} twoToneColor="#eb2f96"/>
           }
         }
       ]}
@@ -232,7 +253,6 @@ const DetailDrawer: React.FC<DetailProps> = (props) => {
       ]}
       dataSource={props.values}
     />
-    <Divider/>
   </Drawer>
 }
 

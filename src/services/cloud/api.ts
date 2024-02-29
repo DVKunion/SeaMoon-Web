@@ -1,4 +1,4 @@
-import request from '../request/request'
+import request from '@/services/request'
 import {FormValueType} from "@/pages/cloud/components/CreateForm";
 
 export async function getCloudProvider(page: number, size: number) {

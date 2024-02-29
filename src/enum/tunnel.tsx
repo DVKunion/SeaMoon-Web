@@ -20,11 +20,11 @@ export const TunnelTypeIcon = {
 }
 
 export const TunnelStatusEnum = {
-  0: {
+  1: {
     text: '创建中',
     status: 'processing',
   },
-  1: {
+  2: {
     text: '正常运行',
     status: 'success',
   },
@@ -44,6 +44,7 @@ export const TunnelStatusEnum = {
 
 
 export const TunnelStatusTag = [
+  <></>,
   <Tag icon={<ClockCircleOutlined spin/>} color={"processing"}>创建中</Tag>,
   <Tag icon={<SyncOutlined spin/>} color="cyan">正常运行</Tag>,
   <Tag icon={<MinusCircleOutlined/>} color="geekblue">停用</Tag>,
