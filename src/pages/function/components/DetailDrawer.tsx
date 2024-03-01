@@ -47,15 +47,19 @@ const DetailDrawer: React.FC<DetailProps> = (props) => {
             props.values.status = 1;
             props.onSubmit(props.values as FormValueType);
           }}
-        >启用</Button> : <Button
-          type={"primary"}
-          shape={"round"}
-          danger
-          onClick={() => {
+        >启用</Button> : <Popconfirm
+          title="停用仅会删除远端实例，不会删除此条记录，您可以再次通过启动来部署。"
+          onConfirm={() => {
             props.values.status = 3;
             props.onSubmit(props.values as FormValueType);
           }}
-          icon={<PoweroffOutlined/>}>停用</Button>}
+          okText="确认"
+          cancelText="取消"
+        ><Button
+          type={"primary"}
+          shape={"round"}
+          danger
+          icon={<PoweroffOutlined/>}>停用</Button></Popconfirm>}
       </Space>
     }
     footer={

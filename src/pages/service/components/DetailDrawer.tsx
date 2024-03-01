@@ -168,7 +168,7 @@ const DetailDrawer: React.FC<DetailProps> = (props) => {
       actionRef={actionRef}
       columns={[
         {
-          title: '请求连接数',
+          title: '当前连接数',
           key: 'number',
           span: 2,
           editable: false,

@@ -1,6 +1,6 @@
 import React from 'react';
 import {ProFormText, ProFormTextArea, ProFormSelect, ProForm} from "@ant-design/pro-components";
-import {ALiYunRegionEnum, SealosRegionEnum} from "@/enum/cloud";
+import {ALiYunRegionEnum, TencentRegionEnum, SealosRegionEnum} from "@/enum/cloud";
 
 export type CloudProviderType = {
   type: string
@@ -8,7 +8,7 @@ export type CloudProviderType = {
 
 export const CloudProviderAuthForm: React.FC<CloudProviderType> = (props) => {
   switch (props.type) {
-    case "1": // 阿里云 AK SK
+    case "1": // 阿里云 AID AK SK
       return <ProForm.Group>
         <ProFormSelect
           name="region"
@@ -63,6 +63,47 @@ export const CloudProviderAuthForm: React.FC<CloudProviderType> = (props) => {
         />
       </ProForm.Group>;
     case "2":
+      return <ProForm.Group>
+        <ProFormSelect
+          name="region"
+          width="xl"
+          label="账户地区"
+          showSearch={true}
+          placeholder={""}
+          tooltip={"选择云账户所属的地区"}
+          valueEnum={TencentRegionEnum}
+          rules={[
+            {
+              required: true,
+              message: "请选择云账户所属的地区!",
+            },
+          ]}
+        />
+        <ProFormText
+          name={"access_key"}
+          label={"SecretID"}
+          width="xl"
+          placeholder={""}
+          rules={[
+            {
+              required: true,
+              message: "请填写SecretID信息!",
+            },
+          ]}
+        />
+        <ProFormText
+          name={"access_secret"}
+          label={"SecretKey"}
+          width="xl"
+          placeholder={""}
+          rules={[
+            {
+              required: true,
+              message: "请填写SecretKey信息!",
+            },
+          ]}
+        />
+      </ProForm.Group>;
     case "3":
     case "4":
     case "5": // Sealos Kubeconfig
@@ -95,7 +136,7 @@ export const CloudProviderAuthForm: React.FC<CloudProviderType> = (props) => {
         ></ProFormTextArea>
       </ProForm.Group>
     default:
-      return <ProForm.Group />
+      return <ProForm.Group/>
   }
 };
 

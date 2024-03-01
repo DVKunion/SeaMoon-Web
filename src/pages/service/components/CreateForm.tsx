@@ -139,7 +139,7 @@ const CreateForm: React.FC<CreateFormProps> = (props) => {
           tunnel_auth_type: 0,
           instance: 5,
           port: 9000,
-          tunnel_type: "websocket-tunnel",
+          tunnel_type: "websocket",
           tls: true,
           tor: false,
         }}

@@ -9,14 +9,14 @@ import {
 } from "@ant-design/icons";
 
 export const TunnelTypeValueEnum = {
-  "websocket-tunnel": <Space><IconFont type={"icon-web-socket"}/>WebSockets</Space>,
+  "websocket": <Space><IconFont type={"icon-web-socket"}/>WebSockets</Space>,
   "grpc-tunnel": <Space><IconFont type={"icon-gRPC-red-copy"}/>GRPC</Space>,
 }
 
 export const TunnelTypeIcon = {
   "unknown": <IconFont type={"icon-svc_node"}/>,
-  "websocket-tunnel": <IconFont type={"icon-web-socket"}/>,
-  "grpc-tunnel": <IconFont type={"icon-gRPC-red-copy"}/>
+  "websocket": <IconFont type={"icon-web-socket"}/>,
+  "grpc": <IconFont type={"icon-gRPC-red-copy"}/>
 }
 
 export const TunnelStatusEnum = {
@@ -53,7 +53,7 @@ export const TunnelStatusTag = [
 ]
 
 export const TunnelAuthFCType = {
-  0: "无认证",
+  1: "无认证",
   5: "签名认证",
   6: "jwt",
 }

@@ -3,7 +3,7 @@ export default {
   'menu.setting': '系统配置',
   'menu.service': '服务',
   'menu.cloud': '云账户管理',
-  'menu.serverless': '函数实例',
+  'menu.function': '函数实例',
   'menu.welcome': '欢迎',
   'menu.more-blocks': '更多区块',
   'menu.home': '首页',

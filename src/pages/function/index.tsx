@@ -9,7 +9,7 @@ import {getServerlessTunnel} from "@/services/serverless/api";
 import {CloudProvideTypeValueEnum, RegionEnum} from "@/enum/cloud";
 import {TunnelStatusEnum, TunnelTypeValueEnum} from "@/enum/tunnel";
 import styles from "./index.less";
-import {handleCreateTunnel, handleDeleteTunnel, handleUpdateTunnel} from "@/pages/serverless/handle";
+import {handleCreateTunnel, handleDeleteTunnel, handleUpdateTunnel} from "@/pages/function/handle";
 
 const {Statistic} = StatisticCard;
 

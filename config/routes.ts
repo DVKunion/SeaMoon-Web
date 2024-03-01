@@ -26,10 +26,10 @@
     component: './service/',
   },
   {
-    path: '/serverless',
-    name: 'serverless',
+    path: '/function',
+    name: 'function',
     icon: 'cluster',
-    component: './serverless/',
+    component: './function/',
   },
   {
     path: 'cloud',

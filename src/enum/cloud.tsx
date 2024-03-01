@@ -4,7 +4,7 @@ import IconFont from "@/components/IconFont";
 export const CloudProvideTypeIcon = [
   <></>,
   <IconFont type={"icon-aliyun"}/>,
-  // <IconFont type={"icon-tengxunyun1"}/>,
+  <IconFont type={"icon-tengxunyun1"}/>,
   // <IconFont type={"icon-huaweiyun1"}/>,
   // <IconFont type={"icon-baiduyun"}/>,
   <IconFont type={"icon-sealos"}/>
@@ -12,7 +12,7 @@ export const CloudProvideTypeIcon = [
 
 export const CloudProvideTypeValueEnum = {
   1: <Space><IconFont type={"icon-aliyun"}/>阿里云</Space>,
-  // 2: <Space><IconFont type={"icon-tengxunyun1"}/>腾讯云</Space>,
+  2: <Space><IconFont type={"icon-tengxunyun1"}/>腾讯云</Space>,
   // 3: <Space><IconFont type={"icon-huaweiyun1"}/>华为云</Space>,
   // 4: <Space><IconFont type={"icon-baiduyun"}/>百度云</Space>,
   5: <Space><IconFont type={"icon-sealos"}/>Sealos</Space>,
@@ -23,9 +23,9 @@ export const CloudProvideTypeEnum = {
   1: {
     text: <Space><IconFont type={"icon-aliyun"}/>阿里云</Space>,
   },
-  // 2: {
-  //   text: <Space><IconFont type={"icon-tengxunyun1"}/>腾讯云</Space>,
-  // },
+  2: {
+    text: <Space><IconFont type={"icon-tengxunyun1"}/>腾讯云</Space>,
+  },
   // 3: {
   //   text: <Space><IconFont type={"icon-huaweiyun1"}/>华为云</Space>,
   // },
@@ -64,12 +64,6 @@ export const CloudProviderStatusEnum = {
   }
 }
 
-export const SealosRegionEnum = {
-  // for sealos
-  "internal": "国内区",
-  "external": "国外区"
-}
-
 export const ALiYunRegionEnum = {
   // 阿里云
   "cn-hangzhou": "华东1(杭州)",
@@ -95,7 +89,32 @@ export const ALiYunRegionEnum = {
   "us-east-1": "美国(弗吉尼亚)",
 }
 
+export const SealosRegionEnum = {
+  // for sealos
+  "internal": "国内区",
+  "external": "国外区"
+}
+
+export const TencentRegionEnum = {
+  "ap-beijing": "华北-北京",
+  "ap-chengdu": "西南-成都",
+  "ap-guangzhou": "华南-广州",
+  "ap-shanghai": "华东-上海",
+  "ap-nanjing": "华东-南京",
+  "ap-hongkong": "中国香港",
+  "ap-mumbai": "亚太南部-孟买",
+  "ap-singapore": "亚太东南-新加坡",
+  "ap-bangkok": "亚太东南-曼谷",
+  "ap-seoul": "亚太东北-首尔",
+  "ap-tokyo": "亚太东北-东京",
+  "eu-frankfurt": "欧洲-法兰克福",
+  "na-ashburn": "美国东部-弗吉尼亚",
+  "na-toronto": "北美-多伦多",
+  "na-siliconvalley": "美国西部-硅谷",
+}
+
 export const RegionEnum = {
-  ...SealosRegionEnum,
   ...ALiYunRegionEnum,
+  ...TencentRegionEnum,
+  ...SealosRegionEnum,
 }
