@@ -1,10 +1,10 @@
 import request from '@/services/request'
 
-/** 获取 SysConfig 列表 GET /api/config */
+/** 获取 SysConfig 列表 GET /api/v1/config */
 export async function getSysConfig() {
   return request<{
     data: Config.SystemConfig;
-  }>('/api/config', {
+  }>('/api/v1/config', {
     headers: {
       'Authorization': localStorage.getItem("token") || "",
     },
@@ -19,7 +19,7 @@ export async function updateSysConfig(data: Config.SystemConfig) {
     msg?: string;
     success: boolean;
     data: Config.SystemConfig;
-  }>('/api/config/', {
+  }>('/api/v1/config/', {
     method: 'PUT',
     headers: {
       'Authorization': localStorage.getItem("token") || "",

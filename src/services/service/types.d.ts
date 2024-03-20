@@ -7,7 +7,8 @@ declare namespace Service {
     listen_address: string,
     listen_port: string
     conn: number,
-    speed: number,
+    speed_up: number,
+    speed_down: number,
     lag: number,
     in_bound: number,
     out_bound: number,

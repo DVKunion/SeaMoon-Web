@@ -1,9 +1,9 @@
 declare namespace Serverless {
   type Tunnel = {
-    cloud_provider_id: number,
-    cloud_provider_type: number,
-    cloud_provider_region: string,
+    provider_id: number,
+    provider_type: number,
     id: number,
+    uniq_id: string,
     created_at: string,
     updated_at: string,
     name: string,
@@ -16,6 +16,7 @@ declare namespace Serverless {
       memory: number,
       instance: number,
       tunnel_auth_type: number,
+      region: string,
       tls: false,
       tor: false
     }

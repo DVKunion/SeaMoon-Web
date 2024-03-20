@@ -6,6 +6,7 @@ import {TunnelForm} from "@/components/StepForm/TunnelForm";
 
 export type FormValueType = {
   cpu: number,
+  region: string,
   memory: number,
   instance: number,
   tunnel_auth_type: number,
@@ -25,6 +26,7 @@ export type CreateFormProps = {
 const CreateForm: React.FC<CreateFormProps> = (props) => {
 
   const [current, setCurrent] = useState<number>(0);
+  const [type, setType] = useState<number>(0);
 
   return (
     <StepsForm
@@ -61,7 +63,9 @@ const CreateForm: React.FC<CreateFormProps> = (props) => {
       <StepsForm.StepForm
         title={"实例选择"}
       >
-        <ProviderSelect values={props.values}/>
+        <ProviderSelect onChange={(values) => {
+          setType(values);
+        }}/>
       </StepsForm.StepForm>
       <StepsForm.StepForm
         grid={true}
@@ -70,17 +74,17 @@ const CreateForm: React.FC<CreateFormProps> = (props) => {
         }}
         title={"函数配置"}
         initialValues={{
-          cpu: '0.05',
-          memory: '128',
-          tunnel_auth_type: 0,
-          instance: 5,
+          cpu: type === 5 ? '0.1' : '0.05',
+          memory: type === 5 ? '64' : '128',
+          tunnel_auth_type: 1,
+          instance: 1,
           port: 9000,
-          tunnel_type: "websocket-tunnel",
+          tunnel_type: "websocket",
           tls: true,
           tor: false,
         }}
       >
-        <TunnelForm/>
+        <TunnelForm type={type}/>
       </StepsForm.StepForm>
     </StepsForm>
   );

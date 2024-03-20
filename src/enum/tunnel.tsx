@@ -10,7 +10,7 @@ import {
 
 export const TunnelTypeValueEnum = {
   "websocket": <Space><IconFont type={"icon-web-socket"}/>WebSockets</Space>,
-  "grpc-tunnel": <Space><IconFont type={"icon-gRPC-red-copy"}/>GRPC</Space>,
+  "grpc": <Space><IconFont type={"icon-gRPC-red-copy"}/>GRPC</Space>,
 }
 
 export const TunnelTypeIcon = {
@@ -52,8 +52,8 @@ export const TunnelStatusTag = [
   <Tag icon={<ExclamationCircleOutlined/>} color="gold">异常</Tag>,
 ]
 
-export const TunnelAuthFCType = {
-  1: "无认证",
-  5: "签名认证",
-  6: "jwt",
+export const TunnelAuthFCTypeEnum  = {
+  1: '无认证',
+  5: '签名认证',
+  6: 'jwt'
 }

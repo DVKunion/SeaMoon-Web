@@ -48,7 +48,6 @@ export const ProxyForm: React.FC = (props) => {
         },
         {
           validator: (rule, value) => {
-            console.log(toNumber(value));
             const v = toNumber(value);
             if (v >= 65535 ||v <= 0 || isNaN(v) ) {
               return Promise.reject(new Error('请输入合法端口号(1-65535)'));

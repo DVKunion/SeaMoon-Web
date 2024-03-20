@@ -22,7 +22,7 @@ export type FormValueType = {
   tunnel_type: string,
   tunnel_name: string,
   tunnel_id: number,
-  cloud_provider_id: number,
+  provider_id: number,
 } & Partial<Service.Proxy>;
 
 export type CreateFormProps = {
@@ -36,6 +36,7 @@ const CreateForm: React.FC<CreateFormProps> = (props) => {
 
   const [current, setCurrent] = useState<number>(0);
   const [deploy, setDeploy] = useState<number>(1);
+  const [type, setType] = useState<number>(0);
   const [tor, setTor] = useState<boolean>(false);
 
   return (
@@ -124,7 +125,9 @@ const CreateForm: React.FC<CreateFormProps> = (props) => {
         <ProForm.Group
         >
           {deploy === 1 ?
-            <TunnelSelect values={props.values} tor={tor}/> : <ProviderSelect values={props.values}/>}
+            <TunnelSelect values={props.values} tor={tor}/> : <ProviderSelect onChange={(values) => {
+              setType(values);
+            }}/>}
         </ProForm.Group>
       </StepsForm.StepForm>
       <StepsForm.StepForm
@@ -136,7 +139,7 @@ const CreateForm: React.FC<CreateFormProps> = (props) => {
         initialValues={{
           cpu: '0.05',
           memory: '128',
-          tunnel_auth_type: 0,
+          tunnel_auth_type: 1,
           instance: 5,
           port: 9000,
           tunnel_type: "websocket",
@@ -145,7 +148,7 @@ const CreateForm: React.FC<CreateFormProps> = (props) => {
         }}
       >
         {deploy === 1 ? "关联函数无法进行高级配置, 请在对应函数实例页面进行修改。" :
-          <TunnelForm/>
+          <TunnelForm type={type}/>
         }
       </StepsForm.StepForm>
     </StepsForm>

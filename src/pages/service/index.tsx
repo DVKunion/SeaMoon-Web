@@ -1,6 +1,6 @@
 import React, {useRef, useState, useEffect} from "react";
 import {Button, message, Space, Switch, Tag} from "antd";
-import {PageContainer, ActionType, ProList, StatisticCard} from "@ant-design/pro-components";
+import {PageContainer, ActionType, ProList, StatisticCard, ProCard} from "@ant-design/pro-components";
 import IconFont from "@/components/IconFont";
 import {ProxyDynamicTagList, ProxyTypeIcon, ProxyTypeTagColor} from "@/enum/service";
 import {getServiceProxy} from "@/services/service/api";
@@ -18,7 +18,8 @@ const calcThread = (n: number, o: number) => {
 
 type staticProps = {
   conn: number,
-  speed: number,
+  speed_up: number,
+  speed_down: number,
   lag: number,
   in_bound: number,
   out_bound: number
@@ -68,7 +69,8 @@ const Proxy: React.FC = () => {
           data.data.forEach((item) => {
             bData.set(item.id, {
               conn: item.conn,
-              speed: item.speed,
+              speed_up: item.speed_up,
+              speed_down: item.speed_down,
               lag: item.lag,
               in_bound: item.in_bound,
               out_bound: item.out_bound,
@@ -132,30 +134,32 @@ const Proxy: React.FC = () => {
         content: {
           render: (_, record) => {
             const oRecord = oData.get(record.id);
-            return <div>
-              <Statistic title="当前连接:" value={record.conn}
-                         trend={calcThread(record.conn, oRecord === undefined ? 0 : oRecord.conn)}/>
-              <Space size={80}>
-                <Statistic title="当前速率:" value={record.speed + " Mbps"}
-                           trend={calcThread(record.speed, oRecord === undefined ? 0 : oRecord.speed)}/>
-                <Statistic title="当前延迟:" value={record.lag + " ms"}
-                           trend={calcThread(record.lag, oRecord === undefined ? 0 : oRecord.lag)}/>
-              </Space>
-              <Space size={80}>
+            return <ProCard gutter={8} style={{margin: "-6% 0 -4% -3%"}} >
+              <ProCard colSpan={12} split={"horizontal"} style={{marginLeft: "-3%"}}>
+                <Statistic title="当前连接:" value={record.conn}
+                           trend={calcThread(record.conn, oRecord === undefined ? 0 : oRecord.conn)}/>
+                <Statistic title="上行速率:" value={record.speed_up === 0 ? "未测速" : record.speed_up.toFixed(2) + " Mbps"}
+                           trend={record.speed_up === 0 ? undefined : calcThread(record.speed_up, oRecord === undefined ? 0 : oRecord.speed_up)}/>
                 <Statistic title="总计流入:" valueRender={() => {
                   return SpeedTransfer({
                     bytes: record.in_bound,
-                    decimals:2,
+                    decimals: 2,
                   });
                 }} trend={calcThread(record.in_bound, oRecord === undefined ? 0 : oRecord.in_bound)}/>
+              </ProCard>
+              <ProCard colSpan={12} split={"horizontal"}>
+                <Statistic title="当前延迟:" value={record.lag + " ms"}
+                           trend={calcThread(record.lag, oRecord === undefined ? 0 : oRecord.lag)}/>
+                <Statistic title="下行速率:" value={record.speed_down === 0 ? "未测速" : record.speed_down.toFixed(2) + " Mbps"}
+                           trend={record.speed_down === 0 ? undefined : calcThread(record.speed_down, oRecord === undefined ? 0 : oRecord.speed_down)}/>
                 <Statistic title="总计流出:" valueRender={() => {
                   return SpeedTransfer({
                     bytes: record.out_bound,
-                    decimals:2,
+                    decimals: 2,
                   });
                 }} trend={calcThread(record.out_bound, oRecord === undefined ? 0 : oRecord.out_bound)}/>
-              </Space>
-            </div>
+              </ProCard>
+            </ProCard>
           }
         },
         actions: {

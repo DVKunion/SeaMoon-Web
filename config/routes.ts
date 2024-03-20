@@ -32,10 +32,10 @@
     component: './function/',
   },
   {
-    path: 'cloud',
+    path: 'provider',
     name: 'cloud', // 云账户相关配置
     icon: 'cloud',
-    component: './cloud/',
+    component: './provider/',
   },
   {
     path: '/setting',

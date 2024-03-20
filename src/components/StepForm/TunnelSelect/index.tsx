@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {ProFormSelect} from "@ant-design/pro-components";
 import {Space} from "antd";
-import {getServerlessTunnel} from "@/services/serverless/api";
+import {getServerlessTunnel} from "@/services/function/api";
 import {TunnelTypeValueEnum} from "@/enum/tunnel";
 import {CloudProvideTypeValueEnum} from "@/enum/cloud";
 
@@ -29,7 +29,7 @@ export const TunnelSelect: React.FC<TunnelProps> = (props: TunnelProps) => {
         if(!props.tor || (props.tor && item.tunnel_config.tor)) {
           res.push({
             key: item.id,
-            label: <Space>{CloudProvideTypeValueEnum[item.cloud_provider_type || 0]} - {TunnelTypeValueEnum[item.type]} - {item.name}</Space>,
+            label: <Space>{CloudProvideTypeValueEnum[item.provider_type || 0]} - {TunnelTypeValueEnum[item.type]} - {item.name}</Space>,
             value: item.id,
             obj: item
           });

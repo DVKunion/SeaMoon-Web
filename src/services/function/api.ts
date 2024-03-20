@@ -1,12 +1,12 @@
 import request from '@/services/request'
-import {FormValueType} from "@/pages/serverless/components/CreateForm";
+import {FormValueType} from "@/pages/function/components/CreateForm";
 import {toNumber} from "lodash";
 
 export async function getServerlessTunnel(page: number, size: number) {
   return request<{
     success: boolean;
     data: Serverless.Tunnel[];
-  }>('/api/tunnel?page=' + page + '&size=' + size, {
+  }>('/api/v1/tunnel?page=' + page + '&size=' + size, {
     method: 'GET',
     headers: {
       'Authorization': localStorage.getItem("token") || "",
@@ -14,14 +14,15 @@ export async function getServerlessTunnel(page: number, size: number) {
   });
 }
 
-export async function createServerlessTunnel(data: FormValueType) {
+export async function createFunctionTunnel(data: FormValueType) {
   const params = {
-    "cloud_provider_id": data.cloud_provider_id,
+    "provider_id": data.provider_id,
     "name": data.tunnel_name,
-    "port":data.port?.toString(),
+    "port":data.port,
     "type": data.tunnel_type,
     "status": 1,
     "tunnel_config": {
+      "region": data.region,
       "cpu": toNumber(data.cpu),
       "memory": toNumber(data.memory),
       "instance": toNumber(data.instance),
@@ -33,7 +34,7 @@ export async function createServerlessTunnel(data: FormValueType) {
   return request<{
     success: boolean;
     data: Serverless.Tunnel[];
-  }>('/api/tunnel', {
+  }>('/api/v1/tunnel', {
     method: 'POST',
     data: params,
     headers: {
@@ -42,11 +43,11 @@ export async function createServerlessTunnel(data: FormValueType) {
   });
 }
 
-export async function updateServerlessTunnel(data: FormValueType) {
+export async function updateFunctionTunnel(data: FormValueType) {
   return request<{
     success: boolean;
     data: Serverless.Tunnel[];
-  }>('/api/tunnel/' + data.id + "/", {
+  }>('/api/v1/tunnel/' + data.id + "/", {
     method: 'PUT',
     data: data,
     headers: {
@@ -55,11 +56,11 @@ export async function updateServerlessTunnel(data: FormValueType) {
   });
 }
 
-export async function deleteServerlessTunnel(id: number | undefined) {
+export async function deleteFunctionTunnel(id: number | undefined) {
   return request<{
     success: boolean;
     data: Serverless.Tunnel[];
-  }>('/api/tunnel/' + id + "/", {
+  }>('/api/v1/tunnel/' + id + "/", {
     method: 'DELETE',
     headers: {
       'Authorization': localStorage.getItem("token") || "",

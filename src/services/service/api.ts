@@ -6,7 +6,7 @@ export async function getServiceProxy(page: number, size: number) {
   return request<{
     success: boolean;
     data: Service.Proxy[];
-  }>('/api/proxy?page=' + page + '&size=' + size, {
+  }>('/api/v1/proxy?page=' + page + '&size=' + size, {
     method: 'GET',
     headers: {
       'Authorization': localStorage.getItem("token") || "",
@@ -27,10 +27,10 @@ export async function createServiceProxy(data: FormValueType) {
     params["tunnel_id"] = data.tunnel_id;
   }
   // 说明是 provider 关联
-  if (data.cloud_provider_id !== undefined && data.cloud_provider_id !== 0) {
+  if (data.provider_id !== undefined && data.provider_id !== 0) {
     params["tunnel_id"] = 0
     params["tunnel_create_api"] = {
-      "cloud_provider_id": data.cloud_provider_id,
+      "provider_id": data.provider_id,
       "port": data.port.toString(),
       "name": data.tunnel_name,
       "type": data.tunnel_type,
@@ -51,7 +51,7 @@ export async function createServiceProxy(data: FormValueType) {
     msg?: string;
     code?: number;
     data: Service.Proxy[];
-  }>('/api/proxy', {
+  }>('/api/v1/proxy', {
     method: 'POST',
     data: params,
     headers: {
@@ -66,7 +66,7 @@ export async function updateServiceProxy(data: FormValueType) {
     msg?: string;
     code?: number;
     data: Service.Proxy[];
-  }>('/api/proxy/' + data.id + '/', {
+  }>('/api/v1/proxy/' + data.id + '/', {
     method: 'PUT',
     data: data,
     headers: {
@@ -81,7 +81,7 @@ export async function deleteServiceProxy(data: FormValueType) {
     msg?: string;
     code?: number;
     data: Service.Proxy[];
-  }>('/api/proxy/' + data.id + '/', {
+  }>('/api/v1/proxy/' + data.id + '/', {
     method: 'DELETE',
     headers: {
       'Authorization': localStorage.getItem("token") || "",

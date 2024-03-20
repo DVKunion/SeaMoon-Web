@@ -2,7 +2,7 @@ import React, {useRef, useState} from 'react';
 import type {ProDescriptionsActionType} from '@ant-design/pro-components';
 import {ProDescriptions} from '@ant-design/pro-components';
 import {Button, Divider, Drawer, message, Popconfirm, Space} from "antd";
-import {TunnelAuthFCType, TunnelStatusTag, TunnelTypeValueEnum} from "@/enum/tunnel";
+import {TunnelAuthFCTypeEnum, TunnelStatusTag, TunnelTypeValueEnum} from "@/enum/tunnel";
 import {CloudProvideTypeValueEnum, RegionEnum} from "@/enum/cloud";
 import {CheckCircleTwoTone, CloseCircleTwoTone, CopyOutlined, PoweroffOutlined, SyncOutlined} from "@ant-design/icons";
 // @ts-ignore
@@ -92,6 +92,13 @@ const DetailDrawer: React.FC<DetailProps> = (props) => {
       }}
       columns={[
         {
+          title: 'UniqID',
+          key: 'uniq_id',
+          editable: false,
+          dataIndex: 'uniq_id',
+          span: 2
+        },
+        {
           title: '函数当前状态',
           key: 'status',
           editable: false,
@@ -103,7 +110,7 @@ const DetailDrawer: React.FC<DetailProps> = (props) => {
         },
         {
           title: '账户类型',
-          dataIndex: 'cloud_provider_type',
+          dataIndex: 'provider_type',
           key: 'type',
           editable: false,
           valueEnum: CloudProvideTypeValueEnum,
@@ -143,7 +150,7 @@ const DetailDrawer: React.FC<DetailProps> = (props) => {
           editable: false,
           dataIndex: 'cloud_provider_region',
           render: (dom, record) => {
-            return RegionEnum[record.cloud_provider_region || ""]
+            return RegionEnum[record.tunnel_config?.region || ""]
           }
         },
         {
@@ -208,7 +215,7 @@ const DetailDrawer: React.FC<DetailProps> = (props) => {
           editable: false,
           dataIndex: "tunnel_config.tunnel_auth_type",
           render: (dom, record) => {
-            return TunnelAuthFCType[record.tunnel_config?.tunnel_auth_type || 0]
+            return TunnelAuthFCTypeEnum[record.tunnel_config?.tunnel_auth_type || 1]
           }
         },
         {

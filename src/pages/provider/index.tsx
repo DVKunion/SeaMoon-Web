@@ -4,11 +4,11 @@ import {Button, Popconfirm} from "antd";
 import {PlusOutlined} from "@ant-design/icons";
 import {getCloudProvider} from "@/services/cloud/api";
 import {handleCreateCloud, handleDeleteCloud, handleSyncCloud, handleUpdateCloud} from './handle';
-import {CloudProvideTypeEnum, CloudProviderStatusEnum, RegionEnum} from "@/enum/cloud";
+import {CloudProvideTypeEnum, CloudProviderStatusEnum} from "@/enum/cloud";
 import CreateForm from './components/CreateForm';
 import DetailDrawer from "./components/DetailDrawer";
 
-const Cloud: React.FC = () => {
+const Provider: React.FC = () => {
 
   const actionRef = useRef<ActionType>();
   const [detailModalVisible, setDetailVisible] = useState<boolean>(false);
@@ -41,19 +41,19 @@ const Cloud: React.FC = () => {
       valueEnum: CloudProvideTypeEnum,
     },
     {
-      title: '所属区域',
-      key: "region",
-      dataIndex: 'region',
-      valueType: 'select',
-      valueEnum: RegionEnum,
-      filters: true,
-      onFilter: true,
+      title: '已部署',
+      key: "count",
+      dataIndex: 'count',
+      sorter: true,
     },
     {
       title: '账户余额',
       key: "amount",
       dataIndex: 'amount',
       valueType: 'money',
+      render: (_, record) => {
+        return "¥ " + record.info.amount
+      }
     },
     {
       title: '账户状态',
@@ -198,4 +198,4 @@ const Cloud: React.FC = () => {
   </PageContainer>
 }
 
-export default Cloud
+export default Provider

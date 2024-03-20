@@ -1,16 +1,21 @@
 import React from "react";
 import {ProForm, ProFormSwitch, ProFormText, ProFormSelect} from "@ant-design/pro-components";
 import {toNumber} from "lodash";
-import {TunnelAuthFCType, TunnelTypeValueEnum} from "@/enum/tunnel";
+import {TunnelAuthFCTypeEnum, TunnelTypeValueEnum} from "@/enum/tunnel";
+import {CloudRegionOneSelector} from "@/pages/provider/components/AuthForm";
 
-export const TunnelForm: React.FC = (props) => {
+export type TunnelFormProps = {
+  type: number
+}
+
+export const TunnelForm: React.FC<TunnelFormProps> = (props) => {
   return <> <ProForm.Group
     title={"基础信息"}
   >
     <ProFormText
       name="tunnel_name"
       label={"函数名称"}
-      colProps={{span: 20}}
+      colProps={{span: 8}}
       rules={[
         {
           required: true,
@@ -22,11 +27,12 @@ export const TunnelForm: React.FC = (props) => {
         },
         {
           max: 24,
-          message: "代理名称不要超过24个字符",
+          message: "代理名称不要超过60个字符",
         }
       ]
       }
     />
+    <CloudRegionOneSelector type={props.type} />
   </ProForm.Group>
     <ProForm.Group
       title={"函数规格"}
@@ -124,7 +130,7 @@ export const TunnelForm: React.FC = (props) => {
         tooltip={"云函数自身提供认证方式，配置该项可防止被刷"}
         colProps={{span: 8}}
         placeholder={""}
-        valueEnum={TunnelAuthFCType}
+        valueEnum={TunnelAuthFCTypeEnum}
         showSearch={true}
         rules={[
           {

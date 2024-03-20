@@ -1,11 +1,11 @@
 import request from '@/services/request'
-import {FormValueType} from "@/pages/cloud/components/CreateForm";
+import {FormValueType} from "@/pages/provider/components/CreateForm";
 
 export async function getCloudProvider(page: number, size: number) {
   return request<{
     success: boolean;
     data: Cloud.Provider[];
-  }>('/api/provider?page=' + page + '&size=' + size, {
+  }>('/api/v1/provider?page=' + page + '&size=' + size, {
     method: 'GET',
     headers: {
       'Authorization': localStorage.getItem("token") || "",
@@ -17,7 +17,7 @@ export async function getActiveProvider() {
   return request<{
     success: boolean;
     data: Cloud.Provider[];
-  }>('/api/provider/active', {
+  }>('/api/v1/provider/active', {
     method: 'GET',
     headers: {
       'Authorization': localStorage.getItem("token") || "",
@@ -38,14 +38,15 @@ export async function createProvider(data: FormValueType) {
   params["name"] = data.name
   params["type"] = data.type
   params["desc"] = data.desc
-  params["region"] = data.region
+  params["status"] = data.status
+  params["regions"] = typeof data.regions === "string" ? [data.regions] : data.regions
 
   return request<{
     success: boolean;
     msg?: string;
     code?: number;
     data: Cloud.Provider[];
-  }>('/api/provider', {
+  }>('/api/v1/provider', {
     method: 'POST',
     headers: {
       'Authorization': localStorage.getItem("token") || "",
@@ -83,13 +84,14 @@ export async function updateProvider(data: FormValueType) {
   params["name"] = data.name
   params["status"] = data.status
   params["desc"] = data.desc
+  params["regions"] = data.regions
 
   return request<{
     success: boolean;
     msg?: string;
     code?: number;
     data: Cloud.Provider[];
-  }>('/api/provider/' + data.id + "/", {
+  }>('/api/v1/provider/' + data.id + "/", {
     method: 'PUT',
     headers: {
       'Authorization': localStorage.getItem("token") || "",
@@ -104,7 +106,7 @@ export async function deleteProvider(id: number) {
     msg?: string;
     code?: number;
     data: Cloud.Provider[];
-  }>('/api/provider/' + id + '/', {
+  }>('/api/v1/provider/' + id + '/', {
     method: 'DELETE',
     headers: {
       'Authorization': localStorage.getItem("token") || "",
@@ -118,7 +120,7 @@ export async function syncProvider(id: number) {
     msg?: string;
     code?: number;
     data: Cloud.Provider[];
-  }>('/api/provider/sync/' + id + '/', {
+  }>('/api/v1/provider/sync/' + id + '/', {
     method: 'PUT',
     headers: {
       'Authorization': localStorage.getItem("token") || "",

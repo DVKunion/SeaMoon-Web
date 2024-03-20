@@ -1,11 +1,11 @@
 import {message} from "antd";
 import type {FormValueType} from "./components/CreateForm";
-import {createServerlessTunnel, deleteServerlessTunnel, updateServerlessTunnel} from "@/services/serverless/api";
+import {createFunctionTunnel, deleteFunctionTunnel, updateFunctionTunnel} from "@/services/function/api";
 
 export const handleCreateTunnel = async (fields: FormValueType) => {
   const hide = message.loading('创建中......', 30);
   try {
-    const {success} = await createServerlessTunnel(fields);
+    const {success} = await createFunctionTunnel(fields);
     hide();
     if (success) {
       message.success('创建成功');
@@ -20,7 +20,7 @@ export const handleCreateTunnel = async (fields: FormValueType) => {
 export const handleUpdateTunnel = async (fields: FormValueType) => {
   const hide = message.loading('更新中......');
   try {
-    const {success} = await updateServerlessTunnel(fields);
+    const {success} = await updateFunctionTunnel(fields);
     hide();
     if (success) {
       message.success('更新成功');
@@ -40,7 +40,7 @@ export const handleDeleteTunnel = async (fields: number | undefined) => {
     return false;
   }
   try {
-    const {success} = await deleteServerlessTunnel(fields);
+    const {success} = await deleteFunctionTunnel(fields);
     hide();
     if (success) {
       message.success('删除成功');

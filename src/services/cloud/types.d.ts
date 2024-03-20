@@ -6,9 +6,11 @@ declare namespace Cloud {
     name: string,
     desc: string,
     type: number,
-    region: string,
-    amount: number,
-    cost: number,
+    regions: string[],
+    info: {
+      amount: number,
+      cost: number,
+    }
     status: number,
     count: number,
     max_limit: number

@@ -5,8 +5,8 @@ export const CloudProvideTypeIcon = [
   <></>,
   <IconFont type={"icon-aliyun"}/>,
   <IconFont type={"icon-tengxunyun1"}/>,
-  // <IconFont type={"icon-huaweiyun1"}/>,
-  // <IconFont type={"icon-baiduyun"}/>,
+  <IconFont type={"icon-huaweiyun1"}/>,
+  <IconFont type={"icon-baiduyun"}/>,
   <IconFont type={"icon-sealos"}/>
 ]
 
@@ -90,27 +90,28 @@ export const ALiYunRegionEnum = {
 }
 
 export const SealosRegionEnum = {
-  // for sealos
-  "internal": "国内区",
-  "external": "国外区"
+  "beijing-a":   "北京 A",
+  "singapore-b": "新加坡 B",
+  "guangzhou-g": "广州 G",
+  "hangzhou-h":  "杭州 H",
 }
 
 export const TencentRegionEnum = {
-  "ap-beijing": "华北-北京",
-  "ap-chengdu": "西南-成都",
-  "ap-guangzhou": "华南-广州",
-  "ap-shanghai": "华东-上海",
-  "ap-nanjing": "华东-南京",
+  "ap-beijing": "华北(北京)",
+  "ap-chengdu": "西南(成都)",
+  "ap-guangzhou": "华南(广州)",
+  "ap-shanghai": "华东(上海)",
+  "ap-nanjing": "华东(南京)",
   "ap-hongkong": "中国香港",
-  "ap-mumbai": "亚太南部-孟买",
-  "ap-singapore": "亚太东南-新加坡",
-  "ap-bangkok": "亚太东南-曼谷",
-  "ap-seoul": "亚太东北-首尔",
-  "ap-tokyo": "亚太东北-东京",
-  "eu-frankfurt": "欧洲-法兰克福",
-  "na-ashburn": "美国东部-弗吉尼亚",
-  "na-toronto": "北美-多伦多",
-  "na-siliconvalley": "美国西部-硅谷",
+  "ap-mumbai": "亚太南部(孟买)",
+  "ap-singapore": "亚太东南(新加坡)",
+  "ap-bangkok": "亚太东南(曼谷)",
+  "ap-seoul": "亚太东北(首尔)",
+  "ap-tokyo": "亚太东北(东京)",
+  "eu-frankfurt": "欧洲(法兰克福)",
+  "na-ashburn": "美国东部(弗吉尼亚)",
+  "na-toronto": "北美(多伦多)",
+  "na-siliconvalley": "美国西部(硅谷)",
 }
 
 export const RegionEnum = {

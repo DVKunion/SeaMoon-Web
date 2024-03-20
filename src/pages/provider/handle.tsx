@@ -1,6 +1,6 @@
 import {message} from "antd";
 import {toNumber} from "lodash";
-import type {FormValueType} from "@/pages/cloud/components/CreateForm";
+import type {FormValueType} from "@/pages/provider/components/CreateForm";
 import {createProvider, deleteProvider, syncProvider, updateProvider} from "@/services/cloud/api";
 
 export const handleCreateCloud = async (fields: FormValueType) => {
@@ -59,7 +59,7 @@ export const handleDeleteCloud = async (fields: number | undefined) => {
 };
 
 export const handleSyncCloud = async (fields: number | undefined) => {
-  const hide = message.loading('同步中......');
+  const hide = message.loading('同步中......', 30);
   if (fields === undefined) {
     hide();
     message.error("数据错误:不存在的数据记录")

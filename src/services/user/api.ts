@@ -1,7 +1,7 @@
 import request from '@/services/request'
 
 export async function login(body: Auth.User, options?: { [key: string]: any }) {
-  return request<Auth.Response>('/api/user/login', {
+  return request<Auth.Response>('/api/v1/user/login', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -12,7 +12,7 @@ export async function login(body: Auth.User, options?: { [key: string]: any }) {
 }
 
 export async function updatePasswd(passwd: string) {
-  return request<Auth.Response>('/api/user/passwd', {
+  return request<Auth.Response>('/api/v1/user/passwd', {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',

@@ -1,11 +1,11 @@
 import React, {useRef, useState} from "react";
-import {ActionType, PageContainer, ProList, StatisticCard} from "@ant-design/pro-components";
-import {Badge, Button, Space, Tag} from "antd";
+import {ActionType, PageContainer, ProList, StatisticCard, ProCard} from "@ant-design/pro-components";
+import {Badge, Button, Space, Tag, Tooltip} from "antd";
 import {PlusOutlined} from "@ant-design/icons";
 import IconFont from "@/components/IconFont";
 import CreateForm from "./components/CreateForm";
 import DetailDrawer from "./components/DetailDrawer";
-import {getServerlessTunnel} from "@/services/serverless/api";
+import {getServerlessTunnel} from "@/services/function/api";
 import {CloudProvideTypeValueEnum, RegionEnum} from "@/enum/cloud";
 import {TunnelStatusEnum, TunnelTypeValueEnum} from "@/enum/tunnel";
 import styles from "./index.less";
@@ -19,7 +19,6 @@ const Tunnel: React.FC = () => {
   const [detailModalVisible, setDetailVisible] = useState<boolean>(false);
   const [createModalVisible, setCreateVisible] = useState<boolean>(false);
   const [currentRow, setCurrentRow] = useState<Serverless.Tunnel>();
-
 
   return <PageContainer
     title={"函数实例"}
@@ -81,24 +80,27 @@ const Tunnel: React.FC = () => {
         },
         content: {
           render: (dom, record) => {
-            return <div>
+            return <ProCard gutter={8} bordered={false}  split={"horizontal"} >
+              <ProCard bordered={false} split={"horizontal"}>
               <Statistic title="当前状态:" valueRender={() => <Badge style={{fontSize: "12px"}}
                                                                  status={TunnelStatusEnum[record.status]?.status}
                                                                  text={TunnelStatusEnum[record.status]?.text}/>}/>
               <Statistic title="账户类型:" valueRender={() => {
-                return <div>{CloudProvideTypeValueEnum[record.cloud_provider_type]} - {RegionEnum[record.cloud_provider_region]}</div>
+                return <div>{CloudProvideTypeValueEnum[record.provider_type]} - {RegionEnum[record.tunnel_config.region]}</div>
               }}/>
               <Statistic title="隧道地址:"
-                         value={record.address === undefined || record.address === null ? "-" : record.address}/>
-              <Space size={40} style={{marginTop: "5px"}}>
-                <Statistic title="端口号:" valueRender={() => record.port}/>
-                <Statistic title="函数规格:"
-                           valueRender={() => <Space><IconFont
-                             type={"icon-cpu1"}/>{record.tunnel_config.cpu} M <IconFont
-                             type={"icon-memory1"}/>{record.tunnel_config.memory} Mi </Space>}/>
+                         value={record.address === undefined || record.address === null ? "-" : record.address}
+                         valueRender={() => {
+                           return record.address.length > 40 ? <Tooltip title={record.address}>{record.address.substring(0, 39) + "..."}</Tooltip> : record.address
+                         }}
+              />
 
-              </Space>
-            </div>;
+              <Statistic title="函数规格:"
+                         valueRender={() => <Space><IconFont
+                           type={"icon-cpu1"}/>{record.tunnel_config.cpu} M <IconFont
+                           type={"icon-memory1"}/>{record.tunnel_config.memory} Mi </Space>}/>
+              </ProCard>
+            </ProCard>
           }
         },
         actions: {

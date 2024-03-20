@@ -6,7 +6,8 @@ import {
 import {Modal} from 'antd';
 import React, {useState} from 'react';
 import {CloudProvideTypeValueEnum} from "@/enum/cloud";
-import {CloudProviderAuthForm} from "@/pages/cloud/components/AuthForm";
+import {CloudProviderAuthForm} from "@/pages/provider/components/AuthForm";
+import {toNumber} from "lodash";
 
 export type FormValueType = {
   access_id?: string,
@@ -25,7 +26,7 @@ export type CreateFormProps = {
 
 const CreateForm: React.FC<CreateFormProps> = (props) => {
 
-  const [cloudType, setCloudType] = useState<string>("0");
+  const [cloudType, setCloudType] = useState<number>(0);
 
   return (
     <StepsForm
@@ -54,7 +55,7 @@ const CreateForm: React.FC<CreateFormProps> = (props) => {
       <StepsForm.StepForm
         title={'基本信息'}
         onFinish={async (value) => {
-          setCloudType(value["type"]);
+          setCloudType(toNumber(value["type"]));
           return true;
         }}
       >

@@ -170,18 +170,8 @@ const DetailDrawer: React.FC<DetailProps> = (props) => {
         {
           title: '当前连接数',
           key: 'number',
-          span: 2,
           editable: false,
           dataIndex: 'conn',
-        },
-        {
-          title: '当前速率',
-          key: 'number',
-          editable: false,
-          dataIndex: 'speed',
-          render: (dom, entity) => {
-            return entity.speed + " Mbps"
-          }
         },
         {
           title: '当前延迟',
@@ -190,6 +180,24 @@ const DetailDrawer: React.FC<DetailProps> = (props) => {
           dataIndex: 'lag',
           render: (dom, entity) => {
             return entity.lag + " ms"
+          }
+        },
+        {
+          title: '上行速率',
+          key: 'number',
+          editable: false,
+          dataIndex: 'speed_up',
+          render: (dom, entity) => {
+            return entity.speed_up === 0 ? "未测速" : entity.speed_up + " Mbps"
+          }
+        },
+        {
+          title: '下行速率',
+          key: 'number',
+          editable: false,
+          dataIndex: 'speed_down',
+          render: (dom, entity) => {
+            return entity.speed_down === 0 ? "未测速" : entity.speed_down + " Mbps"
           }
         },
         {

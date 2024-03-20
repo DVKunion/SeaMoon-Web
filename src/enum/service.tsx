@@ -3,11 +3,12 @@ import {
   SyncOutlined,
   MinusCircleOutlined,
   CloseCircleOutlined,
-  ExclamationCircleOutlined,
+  // ExclamationCircleOutlined,
   ClockCircleOutlined
 } from "@ant-design/icons";
 import IconFont from "@/components/IconFont";
 import React from "react";
+import ThunderboltOutlined from "@ant-design/icons/ThunderboltOutlined";
 
 export type DynamicProps = {
   status: number
@@ -25,7 +26,7 @@ export const ProxyDynamicTagList: React.FC<DynamicProps> = (props) => {
     case 4:
       return <Tag icon={<CloseCircleOutlined/>} color="red">服务错误</Tag>
     case 5:
-      return <Tag icon={<ExclamationCircleOutlined/>} color="gold">服务异常</Tag>
+      return <Tag icon={<ThunderboltOutlined/>} color="blue">测速中</Tag>
   }
   return <></>
 }
