@@ -1,5 +1,5 @@
 import React, {useState, useRef} from "react";
-import {PageContainer, ProCard, ProForm, ProFormText, ProFormInstance} from "@ant-design/pro-components";
+import {PageContainer, ProCard, ProForm, ProFormText, ProFormInstance, ProFormSwitch} from "@ant-design/pro-components";
 import {Button, message, Space, Tag} from "antd"
 import {getSysConfig} from "@/services/setting/api";
 import {GithubOutlined} from "@ant-design/icons";
@@ -28,11 +28,19 @@ const Setting: React.FC = () => {
             }
           }
           await handleUpdateSysConfig(values);
+          values.auto_start = values.auto_start == "true";
           formRef?.current?.setFieldsValue(values);
         }}
         params={{}}
         request={async () => {
           const {data} = await getSysConfig();
+          if (data.auto_start === "true") {
+            // @ts-ignore
+            data.auto_start = true;
+          } else {
+            // @ts-ignore
+            data.auto_start = false;
+          }
           setVersion(data.version);
           return data;
         }}
@@ -59,6 +67,21 @@ const Setting: React.FC = () => {
             placeholder={"e.g.: .seamoon.log"}
           />
         </ProForm.Group>
+        <ProForm.Group title={"其他配置"}>
+          <ProFormSwitch
+            name="auto_start"
+            label="自动运行"
+            tooltip={"当服务重新启动时，自动启动所有运行状态下的代理, 否则重启将会自动停止所有代理服务"}
+            width={"xs"}
+            fieldProps={
+              {
+                checkedChildren: "开启",
+                unCheckedChildren: "关闭",
+              }
+            }
+            style={{display: 'flex', alignItems: 'center'}}
+          />
+        </ProForm.Group>
         <ProForm.Group title={"账户认证"}>
           <ProFormText.Password
             name="admin_password"
@@ -68,21 +91,6 @@ const Setting: React.FC = () => {
             placeholder={""}
           />
         </ProForm.Group>
-        {/*<ProForm.Group title={"其他配置"}>*/}
-        {/*<ProFormSwitch*/}
-        {/*  name="tor_enable"*/}
-        {/*  label="是否开启 Tor 网桥"*/}
-        {/*  tooltip={"开启 Tor 网桥后, 会尝试请求开启了 Tor 标识的服务节点，您的代理服务将可以访问暗网域名"}*/}
-        {/*  width={"xs"}*/}
-        {/*  fieldProps={*/}
-        {/*    {*/}
-        {/*      checkedChildren: "开启",*/}
-        {/*      unCheckedChildren: "关闭",*/}
-        {/*    }*/}
-        {/*  }*/}
-        {/*  style={{display: 'flex', alignItems: 'center'}}*/}
-        {/*/>*/}
-        {/*</ProForm.Group>*/}
         <ProForm.Item>
           <Button type="primary" htmlType="submit" style={{float: "right", marginRight: "4em"}}>
             保存

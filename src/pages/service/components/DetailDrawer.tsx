@@ -3,7 +3,7 @@ import type {ProDescriptionsActionType} from '@ant-design/pro-components';
 import {ProDescriptions, ProFormSelect} from '@ant-design/pro-components';
 import {FormValueType} from "@/pages/service/components/CreateForm";
 import {Button, Divider, Drawer, Popconfirm, Space} from "antd";
-import {PoweroffOutlined, SyncOutlined} from "@ant-design/icons";
+import {PoweroffOutlined, SyncOutlined, ThunderboltTwoTone} from "@ant-design/icons";
 import {ProxyDynamicTagList, ProxyTypeValueEnum} from "@/enum/service";
 import {SpeedTransfer} from "@/components/SpeedTransfer";
 
@@ -13,6 +13,7 @@ export type DetailProps = {
   onCancel: () => void;
   onDelete: (values: FormValueType) => Promise<void>;
   onSubmit: (values: FormValueType) => Promise<void>;
+  onSpeed: (values: FormValueType) => Promise<void>;
   detailVisible: boolean;
   values: Partial<Service.Proxy>;
 };
@@ -26,23 +27,30 @@ const DetailDrawer: React.FC<DetailProps> = (props) => {
     onClose={props.onCancel}
     open={props.detailVisible}
     extra={
-      props.values.status === 3 ? <Button
-        type={"primary"}
-        shape={"round"}
-        icon={<SyncOutlined spin={false}/>}
-        onClick={() => {
-          props.values.status = 2;
-          props.onSubmit(props.values as FormValueType);
-        }}
-      >启动</Button> : <Button
-        type={"primary"}
-        shape={"round"}
-        danger
-        onClick={() => {
-          props.values.status = 3;
-          props.onSubmit(props.values as FormValueType);
-        }}
-        icon={<PoweroffOutlined/>}>停止</Button>
+      <Space>
+        <Button shape="round" icon={<ThunderboltTwoTone/>}
+                onClick={() => {
+                  props.onSpeed(props.values as FormValueType)
+                }}
+        > 测速</Button>
+        {props.values.status === 3 ? <Button
+          type={"primary"}
+          shape={"round"}
+          icon={<SyncOutlined spin={false}/>}
+          onClick={() => {
+            props.values.status = 2;
+            props.onSubmit(props.values as FormValueType);
+          }}
+        >启动</Button> : <Button
+          type={"primary"}
+          shape={"round"}
+          danger
+          onClick={() => {
+            props.values.status = 3;
+            props.onSubmit(props.values as FormValueType);
+          }}
+          icon={<PoweroffOutlined/>}>停止</Button>}
+      </Space>
     }
     footer={
       <Space style={{float: "right"}}><Button type={"primary"} onClick={() => {
@@ -79,7 +87,7 @@ const DetailDrawer: React.FC<DetailProps> = (props) => {
           dataIndex: 'status',
           span: 2,
           render: (dom, entry) => {
-            return <ProxyDynamicTagList status={entry.status ? entry.status : 0} spin={props.spin}/>
+            return <ProxyDynamicTagList status={entry.status ? entry.status : 0} spin={props.spin} msg={entry.status_message}/>
           }
         },
         {

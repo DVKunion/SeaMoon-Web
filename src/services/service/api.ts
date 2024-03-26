@@ -61,6 +61,13 @@ export async function createServiceProxy(data: FormValueType) {
 }
 
 export async function updateServiceProxy(data: FormValueType) {
+  const params = {
+    "id": data.id,
+    "type": data.type,
+    "listen_address": data.listen_address,
+    "listen_port": data.listen_port,
+    "status": data.status,
+  }
   return request<{
     success: boolean;
     msg?: string;
@@ -68,7 +75,7 @@ export async function updateServiceProxy(data: FormValueType) {
     data: Service.Proxy[];
   }>('/api/v1/proxy/' + data.id + '/', {
     method: 'PUT',
-    data: data,
+    data: params,
     headers: {
       'Authorization': localStorage.getItem("token") || "",
     },
@@ -83,6 +90,21 @@ export async function deleteServiceProxy(data: FormValueType) {
     data: Service.Proxy[];
   }>('/api/v1/proxy/' + data.id + '/', {
     method: 'DELETE',
+    headers: {
+      'Authorization': localStorage.getItem("token") || "",
+    },
+  });
+}
+
+export async function speedServiceProxy(data: FormValueType) {
+  return request<{
+    success: boolean;
+    msg?: string;
+    code?: number;
+    data: Service.Proxy[];
+  }>('/api/v1/proxy/speed/' + data.id + '/', {
+    method: 'GET',
+    data: data,
     headers: {
       'Authorization': localStorage.getItem("token") || "",
     },

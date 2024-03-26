@@ -1,4 +1,4 @@
-import {Tag, Space} from "antd";
+import {Tag, Space, Tooltip} from "antd";
 import {
   SyncOutlined,
   MinusCircleOutlined,
@@ -13,6 +13,7 @@ import ThunderboltOutlined from "@ant-design/icons/ThunderboltOutlined";
 export type DynamicProps = {
   status: number
   spin: boolean
+  msg?: string
 }
 
 export const ProxyDynamicTagList: React.FC<DynamicProps> = (props) => {
@@ -24,7 +25,9 @@ export const ProxyDynamicTagList: React.FC<DynamicProps> = (props) => {
     case 3:
       return <Tag icon={<MinusCircleOutlined/>} color="geekblue">已停止</Tag>
     case 4:
-      return <Tag icon={<CloseCircleOutlined/>} color="red">服务错误</Tag>
+      return <Tooltip title={props.msg}>
+        <Tag icon={<CloseCircleOutlined/>} color="red">服务错误</Tag>
+      </Tooltip>
     case 5:
       return <Tag icon={<ThunderboltOutlined/>} color="blue">测速中</Tag>
   }

@@ -7,7 +7,7 @@ import {getServiceProxy} from "@/services/service/api";
 import {PlusOutlined} from "@ant-design/icons";
 import CreateForm from "@/pages/service/components/CreateForm";
 import DetailDrawer from "@/pages/service/components/DetailDrawer";
-import {handleCreateProxy, handleDeleteProxy, handleUpdateProxy} from "@/pages/service/handle";
+import {handleCreateProxy, handleDeleteProxy, handleSpeedProxy, handleUpdateProxy} from "@/pages/service/handle";
 import {SpeedTransfer} from "@/components/SpeedTransfer";
 
 const {Statistic} = StatisticCard;
@@ -122,7 +122,7 @@ const Proxy: React.FC = () => {
         },
         subTitle: {
           render: (_, record) => {
-            return <ProxyDynamicTagList status={record.status} spin={autoRoll}/>
+            return <ProxyDynamicTagList status={record.status} spin={autoRoll} msg={record.status_message}/>
           }
         },
         avatar: {
@@ -199,11 +199,19 @@ const Proxy: React.FC = () => {
       }}
       onDelete={async (value) => {
         // 检查当前状态是否为停止，如果非停止，则禁止删除。
-        if (value.status !== 3) {
+        if (value.status === 2) {
           message.error("当前服务状态仍在运行中，请确保服务停止后再删除");
           return;
         }
         await handleDeleteProxy(value)
+        setShowDetail(false);
+        setCurrentRow(undefined);
+        if (actionRef.current) {
+          actionRef.current.reload();
+        }
+      }}
+      onSpeed={async (value) => {
+        await handleSpeedProxy(value)
         setShowDetail(false);
         setCurrentRow(undefined);
         if (actionRef.current) {

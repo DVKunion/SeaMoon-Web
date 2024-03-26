@@ -1,6 +1,6 @@
 import {FormValueType} from "@/pages/service/components/CreateForm";
 import {message} from "antd";
-import {createServiceProxy, deleteServiceProxy, updateServiceProxy} from "@/services/service/api";
+import {createServiceProxy, deleteServiceProxy, speedServiceProxy, updateServiceProxy} from "@/services/service/api";
 
 export const handleCreateProxy = async (fields: FormValueType) => {
   const hide = message.loading('创建中......');
@@ -56,5 +56,21 @@ export const handleDeleteProxy = async (data: FormValueType) => {
   } catch (error) {
     hide();
     message.error('删除失败:' + error);
+  }
+}
+
+export const handleSpeedProxy = async (data: FormValueType) => {
+  const hide = message.loading('测速中......');
+  try {
+    const {success, code, msg} = await speedServiceProxy(data);
+    hide();
+    if (!success) {
+      message.error("测速失败: " +
+        code + ":" + msg
+      )
+    }
+  } catch (error) {
+    hide();
+    message.error('测速失败:' + error);
   }
 }

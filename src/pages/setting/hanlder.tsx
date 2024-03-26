@@ -4,6 +4,11 @@ import {updateSysConfig} from "@/services/setting/api";
 export const handleUpdateSysConfig = async (data: Config.SystemConfig) => {
   const hide = message.loading('更新中......');
   try {
+    if (data.auto_start) {
+      data.auto_start = "true"
+    } else {
+      data.auto_start = "false"
+    }
     const {success, code, msg} = await updateSysConfig(data);
     hide();
     if (success) {
