@@ -208,11 +208,11 @@ export const CloudRegionOneSelector: React.FC<CloudProviderType> = (props) => {
         name="region"
         label={"函数所在地区"}
         colProps={{span: 8, offset: 4}}
-        tooltip={"选择函数部署的地区"}
+        tooltip={"选择函数部署的地区, 不要选择账户以外的区域"}
         rules={[
           {
             required: true,
-            message: "请选择选择函数部署的地区!",
+            message: "请选择函数部署的地区!",
           },
         ]}
       />
@@ -221,12 +221,12 @@ export const CloudRegionOneSelector: React.FC<CloudProviderType> = (props) => {
         name="region"
         label={"函数所在地区"}
         colProps={{span: 8, offset: 4}}
-        tooltip={"选择函数部署的地区"}
+        tooltip={"选择函数部署的地区, 不要选择账户以外的区域"}
         valueEnum={ALiYunRegionEnum}
         rules={[
           {
             required: true,
-            message: "请选择选择函数部署的地区!",
+            message: "请选择函数部署的地区!",
           },
         ]}
       />
@@ -235,12 +235,12 @@ export const CloudRegionOneSelector: React.FC<CloudProviderType> = (props) => {
         name="region"
         label={"函数所在地区"}
         colProps={{span: 8, offset: 4}}
-        tooltip={"选择函数部署的地区"}
+        tooltip={"选择函数部署的地区, 不要选择账户以外的区域"}
         valueEnum={TencentRegionEnum}
         rules={[
           {
             required: true,
-            message: "请选择选择函数部署的地区!",
+            message: "请选择函数部署的地区!",
           },
         ]}
       />
@@ -251,12 +251,12 @@ export const CloudRegionOneSelector: React.FC<CloudProviderType> = (props) => {
         name="region"
         label={"函数所在地区"}
         colProps={{span: 8, offset: 4}}
-        tooltip={"选择函数部署的地区"}
+        tooltip={"选择函数部署的地区, 不要选择账户以外的区域"}
         valueEnum={SealosRegionEnum}
         rules={[
           {
             required: true,
-            message: "请选择选择函数部署的地区!",
+            message: "请选择函数部署的地区!",
           },
         ]}
       />

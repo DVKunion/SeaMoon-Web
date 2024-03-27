@@ -30,6 +30,10 @@ export const ProxyDynamicTagList: React.FC<DynamicProps> = (props) => {
       </Tooltip>
     case 5:
       return <Tag icon={<ThunderboltOutlined/>} color="blue">测速中</Tag>
+    case 6:
+      return <Tag icon={<ClockCircleOutlined spin={props.spin}/>} color="yellow">恢复中</Tag>
+    case 7:
+      return <Tag icon={<ClockCircleOutlined spin={props.spin}/>} color="yellow">删除中</Tag>
   }
   return <></>
 }

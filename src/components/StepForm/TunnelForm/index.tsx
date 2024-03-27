@@ -168,6 +168,7 @@ export const TunnelForm: React.FC<TunnelFormProps> = (props) => {
       <ProFormSwitch
         name="tor"
         label={"开启 Tor 网桥"}
+        tooltip={"开启 Tor 模式会导致内存资源使用增多"}
         checkedChildren={"开启"}
         unCheckedChildren={"关闭"}
         colProps={{

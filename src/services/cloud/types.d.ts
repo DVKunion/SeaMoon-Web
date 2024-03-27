@@ -12,6 +12,7 @@ declare namespace Cloud {
       cost: number,
     }
     status: number,
+    status_message: string,
     count: number,
     max_limit: number
   }

@@ -39,7 +39,7 @@ export const CloudProvideTypeEnum = {
 
 export const CloudProviderStatusEnum = {
   1: {
-    text: '初始化',
+    text: '创建中',
     status: 'processing',
   },
   2: {
@@ -47,20 +47,24 @@ export const CloudProviderStatusEnum = {
     status: 'success',
   },
   3: {
-    text: '已停用',
-    status: 'default',
+    text: '异常',
+    status: 'error',
   },
   4: {
-    text: '已禁用',
-    status: 'warning',
+    text: '同步中',
+    status: 'default',
   },
   5: {
-    text: '认证失败',
+    text: '已禁用',
     status: 'error',
   },
   6: {
     text: '同步失败',
     status: 'error',
+  },
+  7: {
+    text: '删除中',
+    status: 'warning',
   }
 }
 

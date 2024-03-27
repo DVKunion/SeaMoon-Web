@@ -1,7 +1,7 @@
 import React, {useRef, useState} from 'react';
 import type {ProDescriptionsActionType} from '@ant-design/pro-components';
 import {ProDescriptions} from '@ant-design/pro-components';
-import {Button, Divider, Drawer, message, Popconfirm, Space} from "antd";
+import {Button, Divider, Drawer, message, Popconfirm, Space, Tooltip} from "antd";
 import {TunnelAuthFCTypeEnum, TunnelStatusTag, TunnelTypeValueEnum} from "@/enum/tunnel";
 import {CloudProvideTypeValueEnum, RegionEnum} from "@/enum/cloud";
 import {CheckCircleTwoTone, CloseCircleTwoTone, CopyOutlined, PoweroffOutlined, SyncOutlined} from "@ant-design/icons";
@@ -105,7 +105,7 @@ const DetailDrawer: React.FC<DetailProps> = (props) => {
           dataIndex: 'status',
           span: 2,
           render: (dom, entry) => {
-            return TunnelStatusTag[entry.status ? entry.status : 0];
+            return <Tooltip title={entry.status_message}> {TunnelStatusTag[entry.status ? entry.status : 0]}</Tooltip>
           }
         },
         {

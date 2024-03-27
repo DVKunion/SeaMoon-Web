@@ -7,6 +7,7 @@ import {handleCreateCloud, handleDeleteCloud, handleSyncCloud, handleUpdateCloud
 import {CloudProvideTypeEnum, CloudProviderStatusEnum} from "@/enum/cloud";
 import CreateForm from './components/CreateForm';
 import DetailDrawer from "./components/DetailDrawer";
+import {Badge, Tooltip} from "_antd@4.24.15@antd";
 
 const Provider: React.FC = () => {
 
@@ -63,6 +64,13 @@ const Provider: React.FC = () => {
       onFilter: true,
       ellipsis: true,
       valueType: 'select',
+      render: (dom, entry) => {
+        return <Tooltip title={entry.status_message}>
+          <Badge style={{fontSize: "12px"}}
+                 status={CloudProviderStatusEnum[entry.status]?.status}
+                 text={CloudProviderStatusEnum[entry.status]?.text}
+          /></Tooltip>
+      },
       valueEnum: CloudProviderStatusEnum,
     },
     {

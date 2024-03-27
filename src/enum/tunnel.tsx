@@ -25,7 +25,7 @@ export const TunnelStatusEnum = {
     status: 'processing',
   },
   2: {
-    text: '正常运行',
+    text: '运行中',
     status: 'success',
   },
   3: {
@@ -33,11 +33,15 @@ export const TunnelStatusEnum = {
     status: 'default',
   },
   4: {
-    text: '错误',
+    text: '异常',
     status: 'error',
   },
   5: {
-    text: '异常',
+    text: '正在部署',
+    status: 'warning',
+  },
+  6: {
+    text: '删除中',
     status: 'warning',
   },
 }
@@ -46,13 +50,14 @@ export const TunnelStatusEnum = {
 export const TunnelStatusTag = [
   <></>,
   <Tag icon={<ClockCircleOutlined spin/>} color={"processing"}>创建中</Tag>,
-  <Tag icon={<SyncOutlined spin/>} color="cyan">正常运行</Tag>,
-  <Tag icon={<MinusCircleOutlined/>} color="geekblue">停用</Tag>,
-  <Tag icon={<CloseCircleOutlined/>} color="red">错误</Tag>,
-  <Tag icon={<ExclamationCircleOutlined/>} color="gold">异常</Tag>,
+  <Tag icon={<SyncOutlined spin/>} color="cyan">运行中</Tag>,
+  <Tag icon={<MinusCircleOutlined/>} color="geekblue">已停用</Tag>,
+  <Tag icon={<CloseCircleOutlined/>} color="red">异常</Tag>,
+  <Tag icon={<SyncOutlined spin/>} color="gold">正在部署</Tag>,
+  <Tag icon={<ExclamationCircleOutlined/>} color="gold">删除中</Tag>,
 ]
 
-export const TunnelAuthFCTypeEnum  = {
+export const TunnelAuthFCTypeEnum = {
   1: '无认证',
   5: '签名认证',
   6: 'jwt'

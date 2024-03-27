@@ -11,6 +11,7 @@ declare namespace Serverless {
     port: string,
     type: string,
     status: number,
+    status_message: string,
     tunnel_config: {
       cpu: number,
       memory: number,

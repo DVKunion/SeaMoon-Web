@@ -84,6 +84,7 @@ export async function updateProvider(data: FormValueType) {
   params["name"] = data.name
   params["status"] = data.status
   params["desc"] = data.desc
+  params["type"] = data.type
   params["regions"] = data.regions
 
   return request<{

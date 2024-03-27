@@ -2,10 +2,11 @@ import React, {useRef, useState} from 'react';
 import type {ProDescriptionsActionType} from '@ant-design/pro-components';
 import {ProDescriptions} from '@ant-design/pro-components';
 import {FormValueType} from "./CreateForm";
-import {Button, Divider, Drawer, Popconfirm, Space, Tag} from "antd";
+import {Button, Divider, Drawer, Popconfirm, Space, Tag, Tooltip} from "antd";
 import {CloudProviderStatusEnum, CloudProvideTypeValueEnum, RegionEnum} from "@/enum/cloud";
 import {AuthColumns, CloudRegionSelector} from "@/pages/provider/components/AuthForm";
 import {SyncOutlined} from "@ant-design/icons";
+import {Badge} from "_antd@4.24.15@antd";
 
 export type DetailProps = {
   onCancel: () => void;
@@ -75,7 +76,14 @@ const DetailDrawer: React.FC<DetailProps> = (props) => {
           key: 'status',
           editable: false,
           dataIndex: 'status',
-          valueEnum: CloudProviderStatusEnum,
+          render: (dom, entry) => {
+            return <Tooltip title={entry.status_message}> <Badge style={{fontSize: "12px"}}
+              // @ts-ignore
+                                                                 status={CloudProviderStatusEnum[entry.status]?.status}
+              // @ts-ignore
+                                                                 text={CloudProviderStatusEnum[entry.status]?.text}
+            /></Tooltip>
+          },
         },
         {
           title: '账户类型',
